@@ -1,0 +1,182 @@
+
+.list{
+    margin: 10px;
+ 
+ }
+ 
+ 
+  .card{
+     width: 300px;
+     height: 450px;  
+    margin:5px auto ;  
+     
+ }
+    
+     img {
+ 
+         width: 200px;
+         height: 230px;
+         display: flex;
+         padding: 10px;
+         margin: 5px auto;
+         cursor: pointer;
+     
+     }
+   
+    
+   
+  
+     ::ng-deep .carousel-control-prev-icon{
+         background-image: url('https://apufpel.com.br/assets/img/seta_prim.png')
+      }
+      ::ng-deep .carousel-control-next-icon{
+        background-image: url('https://apufpel.com.br/assets/img/seta_ult.png')
+      }
+ 
+
+ 
+ 
+ 
+ 
+ ::ng-deep  .carousel-indicators [data-bs-target] {
+    width : 20px!important;
+   background-color: black;
+   height: 20px !important;
+   border-radius: 50% !important
+ }
+ 
+ 
+      .activityBtn i{
+         margin: 5px 10px;
+      }
+ 
+      .color1{
+         background-color: #d9edf7;
+      }
+ 
+      .color2{
+       background-color: #fcf8e3;
+      }
+      .color3{
+         
+         background-color: #dff0d8;
+      }
+      .color4{
+         background-color: #f2dede;
+      }
+      .color5{
+       background-color: #d9edf7;
+    }
+ 
+ 
+ 
+ .imgBox{
+       
+    display: flex;
+    width: 60px;
+    height: 60px;
+    margin: 1px;
+   }
+   
+ 
+
+ .del{
+    font-size: 30px;
+     color: red;
+     margin-left: 18px;
+     
+ }
+ 
+ .changeIconColour{
+    color:gray;
+ }
+ 
+ .imgBtn{
+    margin-top:10px ;
+    margin-bottom: 10px;
+ }
+ 
+ i{
+    cursor: pointer;
+   
+ }
+ 
+ 
+ 
+ .headNav{
+    background-color: #CFCFC4;
+    width:100%;
+    height: 60px;
+    
+ }
+ 
+ 
+ a{
+    cursor: pointer;
+    font-size: 17px;   
+   
+ }
+ 
+
+ 
+
+ 
+ .desc{
+   
+       
+       width: 50px; 
+       overflow: hidden;
+       text-overflow: ellipsis; 
+       font-style: italic;
+     
+ }
+ 
+ .page{
+   float: right;
+   margin-top: 15px;
+   margin-right:20px;
+}
+ 
+ .footer{
+    background-color: #242c42;
+     width:100%;
+     height: 90px;
+       
+ }
+ 
+ .ngxPagination ::ng-deep .ngx-pagination .current {
+    background:rgb(194, 14, 14);
+  }
+ 
+  .ngxPagination ::ng-deep .ngx-pagination {
+    color: white;
+  }
+ 
+ 
+ 
+  .ngxPagination  ::ng-deep .ngx-pagination a:hover,.ngx-pagination button:hover {
+    background: rgb(194, 14, 14);
+ }
+ 
+ 
+ ::ng-deep  a:not([href]):not([class]), a:not([href]):not([class]):hover {
+    color: red;
+    text-decoration: none;
+ }
+ 
+ .btn{
+    justify-content: center;
+    display: flex;
+ 
+ }
+ 
+ 
+ .newAddedImg{
+    border: yellow solid 2px;
+ }
+
+ .activityBtn{
+   justify-content: center;
+    display: flex;
+   
+ }

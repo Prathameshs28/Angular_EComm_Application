@@ -1,0 +1,202 @@
+.list {
+  margin: 10px;
+}
+
+.card {
+  width: 300px;
+  height: 550px;
+  margin: 5px auto;
+}
+
+img {
+  width: 200px;
+  height: 230px;
+  display: flex;
+  padding: 10px;
+  margin: 5px auto;
+  cursor: pointer;
+}
+
+::ng-deep .carousel-control-prev-icon {
+  background-image: url("https://apufpel.com.br/assets/img/seta_prim.png");
+}
+::ng-deep .carousel-control-next-icon {
+  background-image: url("https://apufpel.com.br/assets/img/seta_ult.png");
+}
+
+/*     ::ng-deep .carousel-indicators{
+    position: absolute;
+     top:230px; 
+
+     
+  }*/
+
+::ng-deep .carousel-indicators [data-bs-target] {
+  width: 20px !important;
+  background-color: black;
+  height: 20px !important;
+  border-radius: 50% !important;
+}
+
+.activityBtn i {
+  margin: 5px 10px;
+}
+
+.color1 {
+  background-color: #d9edf7;
+}
+
+.color2 {
+  background-color: #fcf8e3;
+}
+.color3 {
+  background-color: #dff0d8;
+}
+.color4 {
+  background-color: #f2dede;
+}
+.color5 {
+  background-color: #d9edf7;
+}
+
+.imageUpdate {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.imgBox {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  margin: 1px;
+}
+
+/* .imgBox:hover{
+   backdrop-filter: blur(10px);
+   filter: blur(4px);
+   transition: 0.5s ease;
+} */
+
+.imgBoxBlur {
+  /* backdrop-filter: blur(10px);
+   filter: blur(4px);
+   transition: 0.5s ease; */
+
+  /* filter: blur(4px);  */
+  /* filter: grayscale(100%); */
+  filter: blur(0.9px) grayscale(100%);
+}
+
+.del {
+  font-size: 30px;
+  color: red;
+  margin-left: 18px;
+}
+
+.changeIconColour {
+  color: gray;
+}
+
+.imgBtn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+i {
+  cursor: pointer;
+}
+
+.headNav {
+  background-color: #cfcfc4;
+  width: 100%;
+  height: 60px;
+}
+
+a {
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .show > .nav-link {
+  color: white;
+}
+
+.createprodtab {
+  background-color: #968768;
+  padding: 3px;
+  border-radius: 10px;
+}
+
+.desc {
+  width: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-style: italic;
+}
+
+.page {
+  float: right;
+  margin-top: 15px;
+  margin-right: 20px;
+}
+
+.footer {
+  background-color: #242c42;
+  width: 100%;
+  height: 90px;
+}
+
+.ngxPagination ::ng-deep .ngx-pagination .current {
+  background: rgb(194, 14, 14);
+}
+
+.ngxPagination ::ng-deep .ngx-pagination {
+  color: white;
+}
+
+.ngxPagination ::ng-deep .ngx-pagination a:hover,
+.ngx-pagination button:hover {
+  background: rgb(194, 14, 14);
+}
+
+::ng-deep a:not([href]):not([class]),
+a:not([href]):not([class]):hover {
+  color: red;
+  text-decoration: none;
+}
+
+.btn {
+  justify-content: center;
+  display: flex;
+}
+
+.newAddedImg {
+  border: yellow solid 2px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 98;
+}
+
+.prodUpdate::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.prodUpdate {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.drp {
+  margin-top: 20px;
+  height: 150px;
+  color: gray;
+}

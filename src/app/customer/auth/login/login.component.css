@@ -1,0 +1,64 @@
+.login {
+  border-color: skyblue;
+  width: 400px;
+  padding: 20px;
+  margin: 3% auto;
+}
+
+h1 {
+  text-align: center;
+  color: skyblue;
+  margin-bottom: 40px;
+}
+input {
+  margin: 10px 2px;
+}
+
+button {
+  margin: 10px 0;
+}
+
+.reg {
+  color: gray;
+  display: flex;
+  justify-content: center;
+}
+.reg:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+.logbtn {
+  display: flex;
+  justify-content: center;
+}
+
+.social {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.err {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+hr {
+  border: 2px solid gray;
+}
+
+
+.forgotPass{
+  cursor: pointer;
+   padding: 4px;
+  width: fit-content;
+}
+
+.forgotPass:hover {
+  background-color: #959ba3;
+  color: white;
+}

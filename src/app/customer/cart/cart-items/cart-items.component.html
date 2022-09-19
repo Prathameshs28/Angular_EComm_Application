@@ -1,0 +1,161 @@
+<app-header></app-header>
+
+<nav class="navbar navbar-light navbar-expand-sm headNav">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active createprodtab"
+            (click)="clearCart()"
+            aria-current="page"
+            >Clear Cart</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link active createprodtab"
+            (click)="checkout()"
+            aria-current="page"
+            >CheckOut</a
+          >
+        </li>
+      </ul>
+      <!-- <form class="d-flex">
+          <input class="form-control input-group-sm me-2" type="search"
+          [(ngModel)]="searchTerm" (keyup)="search(searchTerm)" name="searchTerm"
+          placeholder="Search User" aria-label="Search">
+          
+        </form>   -->
+    </div>
+  </div>
+</nav>
+
+<div>
+  <!-- <button class="btn btn-secondary btn-sm" (click)="clearCart()">
+    Clear Cart
+  </button>
+
+  <button class="btn btn-secondary btn-sm" (click)="checkout()">
+    CheckOut
+  </button> -->
+
+  <div *ngIf="flag">
+    <div class="row row-cols-1 row-cols-md-5 g-3 m-4 list">
+      <div *ngFor="let data of localCartData; let i = index">
+        <div class="col">
+          <div class="card-group">
+            <div
+              class="card"
+              [ngClass]="{
+                color1: i % 5 == 0,
+                color2: i % 5 == 1,
+                color3: i % 5 == 2,
+                color4: i % 5 == 3,
+                color5: i % 5 == 4
+              }"
+            >
+              <div class="ProductImage">
+                <ngb-carousel *ngIf="data.images.length > 1; else elseBlock">
+                  <ng-template
+                    ngbSlide
+                    *ngFor="let image of data?.images; let pic = index"
+                  >
+                    <div class="picsum-img-wrapper">
+                      <img
+                        class="img-fluid"
+                        src="{{ data.images[pic].url }}"
+                        alt="Product Image"
+                        (click)="viewProduct(data?._id)"
+                      />
+                    </div>
+                  </ng-template>
+                </ngb-carousel>
+              </div>
+
+              <ng-template #elseBlock>
+                <img
+                  src="{{ data.images[0]?.url }}"
+                  class="card-img-top img-fluid"
+                  alt="mobile"
+                  (click)="viewProduct(data?._id)"
+                />
+              </ng-template>
+
+              <div class="card-body">
+                <h5 class="card-title" style="text-align: center">
+                  {{ data?.name }}
+                </h5>
+                <p class="card-text" style="color: gray; white-space: normal">
+                  Price: {{ data?.price | currency: "INR" }}
+                </p>
+                <p
+                  class="card-text"
+                  style="
+                    color: gray;
+                    white-space: normal;
+                    -webkit-box-orient: vertical;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                  "
+                >
+                  Description: {{ data?.description }}
+                </p>
+              </div>
+
+              <div class="card-footer activityBtn">
+                <div class="countBtn">
+                  <i
+                    title="decrement unit"
+                    class="fa fa-minus-circle"
+                    (click)="decrementCount(data?._id)"
+                    aria-hidden="true"
+                  ></i>
+
+                  <input
+                    type="text"
+                    step="1"
+                    max="10"
+                    value="{{ data.qty }}"
+                    name="quantity"
+                    class="quantity-field border-0 text-center w-25"
+                    style="margin: 0 10px"
+                    readonly
+                  />
+
+                  <i
+                    title="increment unit"
+                    class="fa fa-plus-circle"
+                    (click)="incrementCount(data?._id)"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+
+                <i
+                  title="remove"
+                  class="fa fa-times-circle"
+                  style="color: red"
+                  (click)="sweetAlertForDelete(data?._id)"
+                  aria-hidden="true"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="flag == false">
+    <div class="card cartEmpty">
+      <div class="card-img-overlay">
+        <h2 class="card-title">
+          <strong  style="color: red;">Cart Is Empty!!!</strong>
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>

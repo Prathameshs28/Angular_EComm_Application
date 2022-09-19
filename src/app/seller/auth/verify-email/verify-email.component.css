@@ -1,0 +1,31 @@
+.box{
+    border: gray 2px solid;
+    border-radius: 4px;
+    margin: 50px auto;
+    background-color: skyblue;
+   
+    width: 450px;
+    height: 200px;
+  
+}
+
+.err{
+    
+    color: red;
+  
+}
+
+
+.toLogin{
+    color:white;
+    cursor: pointer;
+}
+.toLogin:hover {
+    color:blue;
+    text-decoration: underline;
+  }
+
+  .msg{
+    text-align: center;
+    margin-top: 50px;
+  }

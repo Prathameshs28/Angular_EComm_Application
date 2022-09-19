@@ -1,0 +1,93 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+
+ 
+
+
+  .main{
+    max-width: 1000px;
+    margin: 10px auto;
+  }
+
+
+  .addressCard{
+    max-width: 400px;
+    margin: 5px auto;
+  }
+
+
+  button{
+    justify-content: center;
+    display: flex;
+  }
+
+.newAddForm{
+  border: 2px solid gray;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+
+}
+
+.cartTotal{
+  /* float: right; */
+  margin-left: 600px;
+
+}
+
+.stpeBtn{
+ 
+  justify-content: center;
+  display: flex; 
+  margin-top: 30px;
+  
+}
+
+.stepbutton{
+  width: 200px;
+}
+
+.totalTd{
+color: red;
+border: solid 1px gray;
+border-radius: 5px;
+margin-right: 110px;
+padding: 10px;
+}
+
+
+h3{
+  /* text-align: center; */
+  margin:20px auto;
+}
+
+
+.orderDetails{
+border: 4px gray solid;
+border-radius: 5px;
+width: 900px;
+padding: 20px;
+}
+
+.prodDtl{
+  height: 300px;
+}
+.example::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.example {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+

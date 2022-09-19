@@ -1,0 +1,27 @@
+
+
+
+<nav class="navbar navbar-light navbar-expand-sm headNav">
+    <div class="container-fluid" >
+   
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+          <li class="nav-item">
+            <a class="nav-link active tab"  aria-current="page" (click)="showProductList()">Product List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active tab" (click)="showMyProfile()">My Profile</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link active tab"  (click)="showAllUsers()">All user List</a>
+            
+          </li>
+        
+        </ul>
+       
+        <!-- <button class="btn btn-sm btn-danger" type="button" (click)="logout()">Logout</button> -->
+        <i class="fa fa-sign-out" title="Logout" aria-hidden="true" (click)="logout()"></i>
+      </div>
+    </div>
+  </nav>
+

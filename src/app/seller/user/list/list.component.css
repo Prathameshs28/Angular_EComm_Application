@@ -1,0 +1,76 @@
+
+
+.tbl{
+   margin-top: 20px;
+   
+   }
+
+  
+   h1{
+      margin-top: 30px;
+      color: skyblue;
+      text-align: center;
+    
+   }
+
+
+   .updatePage{
+      padding: 20px;
+   }
+
+  
+
+   label{
+      padding: 8px;
+   }
+
+
+   .headNav{
+      background-color: #CFCFC4;
+      width:100%;
+      height: 60px;
+      
+   }
+
+   a{
+      cursor: pointer;
+      font-size: 17px;   
+     
+   }
+   
+   .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link {
+      color: white;
+   }
+   
+   
+   .createprodtab{
+      background-color: #968768;
+      padding: 3px;
+      border-radius: 10px;
+   }
+
+   .footer{
+      background-color: #242c42;
+       width:100%;
+       height: 90px;
+       position: fixed;
+     bottom: 0;
+     right: 0;
+          
+   }
+   
+
+   .ngxPagination{
+      float: right;
+   margin-top: 15px;
+   margin-right:25px;
+  
+   }
+
+   .btn{
+      margin-top: 10px;
+      margin-right: 10px;
+      justify-content: center;
+      display: flex;
+  
+   }

@@ -1,0 +1,40 @@
+
+<app-header></app-header>
+<div class="bg">
+    <div class="card text-dark bg-light">
+     
+        
+    
+      <h1 class="card-header" style="font-weight: bold">Profile Details</h1>
+     
+  
+      <div class="card-body">
+        <div>
+          <label class="form-label">Name: {{userData?.name}}</label>
+          <span> </span>
+        </div>
+        <div>
+          <label class="form-label">Email: {{userData?.email}}</label>
+          <span> </span>
+        </div>
+        <div>
+          <label class="form-label">Role: {{userData?.role}}</label>
+          <span> </span>
+        </div>
+        <div>
+          <label class="form-label">Is email Varified: </label>
+          <span style="color: green" *ngIf="mailVerify"> Verified</span>
+          <span style="color: red" *ngIf="!mailVerify"> Pending</span>
+        </div>
+        <div>
+          <label class="form-label">Company Name: {{userData?._org?.name}}</label>
+          <span> </span>
+        </div>
+        
+        <div>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  

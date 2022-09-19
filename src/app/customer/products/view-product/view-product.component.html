@@ -1,0 +1,114 @@
+<app-header></app-header>
+
+<h1 class="h1">Product Details</h1>
+
+<div class="card mb-3" style="max-width: 900px">
+  <div class="row g-0">
+    <div class="col-md-8 prodImage">
+      <div class="oneImg">
+        <div *ngIf="imgClickFlag; else elseBlock">
+          <img
+            class="BigImg"
+            src="{{ oneProduct?.images[imgClickIndex]?.url }}"
+            alt="Product Image"
+          />
+        </div>
+
+        <ng-template #elseBlock>
+          <span *ngIf="oneProduct?.images[0]?.url">
+            <img
+              class="BigImg"
+              src="{{ oneProduct?.images[0]?.url }}"
+              alt="Product Image"
+            />
+          </span>
+
+          <span *ngIf="!oneProduct?.images[0]?.url">
+            <img
+              src="https://t3.ftcdn.net/jpg/04/34/72/82/240_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg"
+              class="BigImg"
+              alt="Image not found"
+            />
+          </span>
+        </ng-template>
+      </div>
+
+      <div style="display: flex">
+        <div class="pull-left mt-sm">
+          <i
+            class="fa fa-chevron-circle-left"
+            (click)="scrollLeft()"
+            aria-hidden="true"
+          ></i>
+        </div>
+
+        <div #widgetsContent class="custom-slider-main">
+          <div
+            class="info-box"
+            *ngFor="let image of oneProduct?.images; let pic = index"
+          >
+            <img
+              class="listImg"
+              src="{{ oneProduct?.images[pic]?.url }}"
+              alt="Product Image"
+              (click)="showBigImg(pic)"
+            />
+          </div>
+        </div>
+
+        <div class="pull-right mt-sm">
+          <i
+            class="fa fa-chevron-circle-right"
+            (click)="scrollRight()"
+            aria-hidden="true"
+          ></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4" style="border-left: 0.5px solid gray">
+      <div class="card-body">
+        <h3
+          class="card-title"
+          style="color: #36454f; margin-bottom: 15px; text-align: center"
+        >
+          {{ oneProduct?.name }}
+        </h3>
+        Description:
+        <div
+          class="card-text lh-base example"
+          style="
+            padding: 15px;
+            color: #36454f;
+            padding: 15px;
+            width: 280px;
+            height: 260px;
+            overflow: scroll;
+          "
+        >
+        Description: <span [innerHTML]="oneProduct?.description | dompurify" ></span>
+          <!-- {{ oneProduct?.description }} -->
+        </div>
+        <p class="card-text" style="margin-top: 15px">
+          <small class="text-muted"
+            >Last updated : {{ oneProduct?.updatedAt | date: "short" }}</small
+          >
+        </p>
+      </div>
+
+      <div class="card-footer activityBtn">
+        <button
+        class="btn btn-sm btn-warning"
+        (click)="addToCart()"
+        style="margin-right: 15px"
+      >
+        Add to cart
+      </button>
+
+      <button class="btn btn-sm btn-success"  (click)="buyNow()">
+        Buy Now
+      </button>
+      </div>
+    </div>
+  </div>
+</div>

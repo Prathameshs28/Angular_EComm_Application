@@ -1,0 +1,136 @@
+.bg {
+    margin-top: 2px;
+  }
+  
+ 
+  
+  .card {
+    margin-top: 10px;
+    text-align: center;
+    width: 700px;
+    height: 580px;
+    margin: 20px auto;
+  }
+  
+  .card-body {
+    text-align: left;
+    margin: 20px 10px;
+
+  }
+  
+  label {
+    font-weight: bold;
+    font-size: larger;
+  }
+  
+ 
+  
+  .list{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    /* float: right; */
+    margin:5px;
+    
+    
+  }
+
+  .info{
+    margin: 10px auto;
+  }
+
+  img{
+    max-height: 100px;
+    max-width: 100px;
+    border-radius: 50%;
+  }
+
+  .myavatar ::ng-deep .avatar-content {
+   
+    max-height: 200px;
+    max-width: 100px;
+    border-radius: 50%;
+}
+
+
+  .headNav{
+    background-color: #CFCFC4;
+    width:100%;
+    height: 60px;
+    
+ }
+ 
+ 
+ a{
+    cursor: pointer;
+    font-size: 17px;   
+   
+ }
+  
+ .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link {
+  color: white;
+}
+
+
+.tab{
+  background-color: #968768;
+  padding: 3px;
+  border-radius: 10px;
+  margin-left:10px ;
+}
+  
+i{
+  font-size: 40px;
+  color:rgb(194, 14, 14);
+  cursor: pointer;
+}
+
+
+
+
+.cropedImgPreview{
+  display: flex;
+  margin: 10px auto;
+}
+
+
+.rmProfilePicture {
+  color:red;
+  padding: 7px;
+  border: #968768 solid 1px;
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.deleteAccount{
+
+  padding: 10px;
+  border: #968768 solid 1px;
+  border-radius: 3px;
+  margin-left:10px ;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+
+
+.backdrop{
+  position: fixed;
+top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 98;
+}
+
+
+.profileUpdate::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.profileUpdate {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}

@@ -1,0 +1,192 @@
+<app-header></app-header>
+<nav class="navbar navbar-light navbar-expand-sm headNav">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active tab"
+            (click)="goToAllOrders()"
+            aria-current="page"
+            >All Orders
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div>
+  <h1 class="h1" style="text-align: center">View Order</h1>
+  <div class="accordion container" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseOne"
+          aria-expanded="true"
+          aria-controls="panelsStayOpen-collapseOne"
+        >
+          Product Details
+        </button>
+      </h2>
+      <div
+        id="panelsStayOpen-collapseOne"
+        class="accordion-collapse collapse show"
+        aria-labelledby="panelsStayOpen-headingOne"
+      >
+        <div class="accordion-body">
+          <div class="row row-cols-1 row-cols-md-4 g-3 ml-3 example"  style="height: 200px;;overflow: scroll">
+            <div *ngFor="let product of prodcutData">
+              <div class="card prodCards">
+                <div class="card-header" style="text-align: center">
+                  <strong style="color: #7f5112">{{ product?.name }}</strong>
+                </div>
+                <div class="card-body" style="text-align: center">
+                  <h5 class="h5 text-muted">Price: {{ product?.price }}</h5>
+                  <h6 class="h6">Quantity: {{ product?.qty }}</h6>
+                </div>
+
+                <div class="card-footer" style="text-align: center">
+                  <strong>Sub Total: {{ product?.subTotal }} </strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseTwo"
+          aria-expanded="false"
+          aria-controls="panelsStayOpen-collapseTwo"
+        >
+          Address Details
+        </button>
+      </h2>
+      <div
+        id="panelsStayOpen-collapseTwo"
+        class="accordion-collapse collapse"
+        aria-labelledby="panelsStayOpen-headingTwo"
+      >
+        <div class="accordion-body">
+          <div class="card addressCard">
+            <div class="card">
+              <div class="card-header">
+                <div class="label" style="text-align: center">
+                  Delivery Address
+                </div>
+              </div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <span class="label">Street: </span>{{ addressData?.street }}
+                </h6>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <span class="label">Address Line 2: </span
+                  >{{ addressData?.addressLine2 }}
+                </h6>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <span class="label">City: </span>{{ addressData?.city }}
+                </h6>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <span class="label">State: </span>{{ addressData?.state }}
+                </h6>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <span class="label">Pin: </span>{{ addressData?.pin }}
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+        <button
+          class="accordion-button collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseThree"
+          aria-expanded="false"
+          aria-controls="panelsStayOpen-collapseThree"
+        >
+          Order Details
+        </button>
+      </h2>
+      <div
+        id="panelsStayOpen-collapseThree"
+        class="accordion-collapse collapse"
+        aria-labelledby="panelsStayOpen-headingThree"
+      >
+        <div class="accordion-body">
+          <div class="card addressCard">
+            <div class="card">
+              <div class="card-header">
+                <div class="label" style="text-align: center">
+                  Order Details
+                </div>
+              </div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2">
+                  <span class="label ord">Order ID: </span>{{ orderData?._id }}
+                </h6>
+                <h6 class="card-subtitle mb-2">
+                  <span class="label ord">Created at: </span
+                  >{{ orderData?.createdAt | date: "short" }}
+                </h6>
+                <h6 class="card-subtitle mb-2">
+                  <span class="label ord">Delivery Fee: </span
+                  >{{ orderData?.deliveryFee | currency: "INR" }}
+                </h6>
+                <h6 class="card-subtitle mb-2">
+                  <span class="label ord">Payment Status: </span>
+                  <span
+                    [ngClass]="{
+                      PAIDSTATUS: orderData?.paymentStatus === 'Paid',
+                      ERRORSTATUS: orderData?.paymentStatus !== 'Paid'
+                    }"
+                    >{{ orderData?.paymentStatus }}</span
+                  >
+                </h6>
+                <h6 class="card-subtitle mb-2">
+                  <span class="label ord">Order Status: </span>
+                  <span
+                    [ngClass]="{
+                      PAIDSTATUS: orderData?.paymentStatus === 'Paid',
+                      ERRORSTATUS: orderData?.paymentStatus !== 'Paid'
+                    }"
+                    >{{ orderData?.status }}</span
+                  >
+                </h6>
+                <h6 class="card-subtitle mb-2">
+                  <span class="label ord">Total: </span>{{ orderData?.total | currency: "INR"  }}
+                </h6>
+              </div>
+
+              <div
+                class="card-footer"
+                *ngIf="orderData?.paymentStatus !== 'Paid'"
+              >
+                <div class="payagainbtn">
+                  <button
+                    class="btn btn-sm btn-success"
+                    (click)="payAgain(orderData?._id)"
+                  >
+                    Pay again
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

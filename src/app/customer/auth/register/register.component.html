@@ -1,0 +1,273 @@
+
+<app-header></app-header>
+<div class="register border border-5 rounded-3">
+  <form [formGroup]="registerForm">
+    <h1>User Registration</h1>
+
+    <div class="fullName">
+      <label class="form-label">Full Name</label>
+
+      <input
+        formControlName="name"
+        [class.is-invalid]="
+          registerForm.get('name')?.invalid && registerForm.get('name')?.touched
+        "
+        type="text"
+        class="form-control"
+        name="name"
+      />
+
+      <div *ngIf="name!.invalid && name!.touched">
+        <small class="text-danger" *ngIf="name!.errors?.['required']"
+          >Full name name is required</small
+        >
+        <small class="text-danger" *ngIf="name!.errors?.['pattern']"
+          >only alphabets are allowed</small
+        >
+      </div>
+
+      <div *ngIf="sumitted && registerForm.get('name')?.untouched">
+        <small
+          class="text-danger"
+          *ngIf="sumitted && registerForm.get('name')?.errors?.['required']"
+          >Full name name is required</small
+        >
+      </div>
+    </div>
+
+    <div class="address">
+      <div>
+        <label class="form-label">Address:</label>
+      </div>
+
+      <div class="addressFields" formArrayName="addresses">
+        <div *ngFor="let add of addresses.controls; let i = index">
+          <div [formGroupName]="i">
+            <div class="row">
+              <div class="col-6">
+
+                <label class="form-label">Address Line 1</label>
+                <input
+                  formControlName="street"
+                  name="street"
+                                  
+                  [class.is-invalid]="addresses.controls[i].get('street')?.invalid && addresses.controls[i].get('street')?.touched"
+                  type="text"
+                  class="form-control"
+                />
+
+                <div *ngIf="addresses.controls[i].get('street')!.invalid && addresses.controls[i].get('street')!.touched">
+                  <small class="text-danger" *ngIf="addresses.controls[i].get('street')!.errors?.['required']"
+                    >Address Line 1 is required</small
+                  >
+                </div>
+          
+                <div *ngIf="sumitted && addresses.controls[i].get('street')?.untouched">
+                  <small
+                    class="text-danger"
+                    *ngIf="sumitted && addresses.controls[i].get('street')?.errors?.['required']"
+                    >Address Line 1 is required</small
+                  >
+                </div>
+
+              </div>
+
+              <div class="col-6">
+                <label class="form-label">Address Line 2</label>
+
+                <input
+                  formControlName="addressLine2"
+          [class.is-invalid]="addresses.controls[i].get('addressLine2')?.invalid && addresses.controls[i].get('addressLine2')?.touched"
+
+                  name="addressLine2"
+                  type="text"
+                  class="form-control"
+                />
+
+                <div *ngIf="addresses.controls[i].get('addressLine2')!.invalid && addresses.controls[i].get('addressLine2')!.touched">
+                  <small class="text-danger" *ngIf="addresses.controls[i].get('addressLine2')!.errors?.['required']"
+                    >Address Line 2 is required</small
+                  >
+                </div>
+          
+                <div *ngIf="sumitted && addresses.controls[i].get('addressLine2')?.untouched">
+                  <small
+                    class="text-danger"
+                    *ngIf="sumitted && addresses.controls[i].get('addressLine2')?.errors?.['required']"
+                    >Address Line 2 is required</small
+                  >
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <label class="form-label">City</label>
+                <input
+                  formControlName="city"
+          [class.is-invalid]="addresses.controls[i].get('city')?.invalid && addresses.controls[i].get('city')?.touched"
+
+                  name="city"
+                  type="text"
+                  class="form-control"
+                />
+
+                <div *ngIf="addresses.controls[i].get('city')!.invalid && addresses.controls[i].get('city')!.touched">
+                  <small class="text-danger" *ngIf="addresses.controls[i].get('city')!.errors?.['required']"
+                    >City is required</small
+                  >
+                 
+                </div>
+          
+                <div *ngIf="sumitted && addresses.controls[i].get('city')?.untouched">
+                  <small
+                    class="text-danger"
+                    *ngIf="sumitted && addresses.controls[i].get('city')?.errors?.['required']"
+                    >City is required</small
+                  >
+                </div>
+
+              </div>
+              <div class="col-6">
+                <label class="form-label">State</label>
+                <input
+                  formControlName="state"
+          [class.is-invalid]="addresses.controls[i].get('state')?.invalid && addresses.controls[i].get('state')?.touched"
+
+                  name="state"
+                  type="text"
+                  class="form-control"
+                />
+
+                <div *ngIf="addresses.controls[i].get('state')!.invalid && addresses.controls[i].get('state')!.touched">
+                  <small class="text-danger" *ngIf="addresses.controls[i].get('state')!.errors?.['required']"
+                    >State is required</small
+                  >
+                
+                </div>
+          
+                <div *ngIf="sumitted && addresses.controls[i].get('state')?.untouched">
+                  <small
+                    class="text-danger"
+                    *ngIf="sumitted && addresses.controls[i].get('state')?.errors?.['required']"
+                    >State is required</small
+                  >
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-3">
+                <label class="form-label">Pin Code</label>
+                <input
+                  formControlName="pin"
+          [class.is-invalid]="addresses.controls[i].get('pin')?.invalid && addresses.controls[i].get('pin')?.touched"
+
+                  name="pin"
+                  type="text"
+                  class="form-control"
+                />
+
+                <div *ngIf="addresses.controls[i].get('pin')!.invalid && addresses.controls[i].get('pin')!.touched">
+                  <small class="text-danger" *ngIf="addresses.controls[i].get('pin')!.errors?.['required']"
+                    >Pin is required</small
+                  >
+                  <small class="text-danger" *ngIf="addresses.controls[i].get('pin')!.errors?.['pattern']"
+                    >Pin code must be 6 digits</small
+                  >
+                </div>
+          
+                <div *ngIf="sumitted && addresses.controls[i].get('pin')?.untouched">
+                  <small
+                    class="text-danger"
+                    *ngIf="sumitted && addresses.controls[i].get('pin')?.errors?.['required']"
+                    >Pin is required</small
+                  >
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="email">
+      <label class="form-label">Email address</label>
+      <input
+        formControlName="email"
+        type="email"
+        [class.is-invalid]="
+          registerForm.get('email')?.invalid &&
+          registerForm.get('email')?.touched
+        "
+        class="form-control"
+        name="email"
+      />
+
+      <div *ngIf="email!.invalid && email!.touched">
+        <small class="text-danger" *ngIf="email!.errors?.['required']"
+          >Email is required</small
+        >
+        <small class="text-danger" *ngIf="email!.errors?.['pattern']"
+          >Email must be a valid email address</small
+        >
+      </div>
+
+      <div *ngIf="sumitted && registerForm.get('email')?.untouched">
+        <small
+          class="text-danger"
+          *ngIf="sumitted && registerForm.get('email')?.errors?.['required']"
+          >Email is required</small
+        >
+      </div>
+    </div>
+
+    <div class="password">
+      <label class="form-label">Password</label>
+      <input
+        formControlName="password"
+        [class.is-invalid]="
+          registerForm.get('password')?.invalid &&
+          registerForm.get('password')?.touched
+        "
+        type="password"
+        class="form-control"
+        name="password"
+      />
+
+      <div *ngIf="password!.invalid && password!.touched">
+        <small class="text-danger" *ngIf="password!.errors?.['required']"
+          >Password is required
+        </small>
+        <small class="text-danger" *ngIf="password!.errors?.['pattern']"
+          >Password should be aplhanumeric(numbers, lower and upper characters
+          and special symbol) and minimum 8 characters</small
+        >
+      </div>
+
+      <div *ngIf="sumitted && registerForm.get('password')?.untouched">
+        <small
+          class="text-danger"
+          *ngIf="sumitted && registerForm.get('password')?.errors?.['required']"
+          >Password is required</small
+        >
+      </div>
+    </div>
+
+    <div *ngIf="error" style="text-align: center;margin: 5px auto;">
+      <small class="text-danger" >{{ error }}</small>
+    </div>
+
+    <div class="button">
+      <button type="submit" class="btn btn-primary" (click)="register()">
+        Register
+      </button>
+    
+    </div>
+
+   
+  </form>
+</div>

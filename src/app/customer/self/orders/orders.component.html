@@ -1,0 +1,56 @@
+<app-header></app-header>
+
+
+<div class="tbl">
+    <h1 class="h1">Order Details</h1>
+   
+    <table class="table table-hover table-sm ">
+      <thead>
+        <tr>
+          <th scope="col">Sr.no</th>
+          <th scope="col">Product List</th>
+          <th scope="col">Total Fee</th>
+          <th scope="col">Order Status</th>
+          <th scope="col">Payment Status</th>
+          <th scope="col">Action</th>
+          <th></th>
+        </tr>
+      </thead>
+  
+      <tbody *ngFor="
+      let data of allProducts
+      let i = index
+    ">
+
+        <tr *ngIf="i >=(limit - 10) && i< limit">
+      
+          <th scope="row">{{i+1}}</th>  
+
+          <td scope="row" style="max-width:400px;max-height: 42px; ">
+          <span *ngFor="let item of data?.items;">
+           <span style="text-overflow: ellipsis;">{{ item.name }} </span> 
+          </span>
+          </td>    
+
+          <td scope="row">{{ data?.total | currency: "INR" }}</td>
+          <td scope="row">{{ data?.status}}</td>
+          <td scope="row">{{ data?.paymentStatus}}</td>
+
+          <td scope="row">
+         <button class="btn btn-sm btn-secondary" (click)="viewOrder(data?._id)">Details</button>    
+          </td>     
+
+        </tr>
+
+      </tbody>
+
+   
+    </table>
+
+    <div class="nextBackButton">  
+         
+      <button *ngIf="limit > 10" style=" margin-right: 10px;" class="btn btn-sm btn-primary nbBtn" (click)="limit = limit - 10" >Back</button>  
+      <button  *ngIf="limit < allProducts?.length" class="btn btn-sm btn-primary nbBtn" (click)="limit = limit + 10">Next</button>    
+
+  </div>
+   </div>

@@ -1,0 +1,98 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="login border border-5 rounded-3">
+  <form  [formGroup]="loginForm">
+    <h1>Login</h1>
+
+    <div class="email">
+      <label class="form-label">Email address</label>
+
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        formControlName="email" 
+
+        [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+        placeholder="Enter registered email" />
+
+    
+
+      <div *ngIf="email!.invalid && email!.touched">
+        <small class="text-danger" *ngIf="email!.errors?.['required']"
+          >Email is required</small>
+     
+      <small class="text-danger" *ngIf="email!.errors?.['pattern']"
+      >Email must be a valid email address</small
+      >
+      </div>
+      <div *ngIf="sumitted && loginForm.get('email')?.untouched ">
+        <small class="text-danger"
+         *ngIf="sumitted && loginForm.get('email')?.errors?.['required']">Email is required</small>
+      </div>
+      
+   </div>
+
+   <div class="password">
+      <label class="form-label">Password</label>
+
+      <input
+        type="password"
+        
+        formControlName="password" 
+        [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        placeholder="Enter password"
+        class="form-control"
+        name="password"
+        
+      /> 
+
+      
+      <div *ngIf="password!.invalid && password!.touched">
+        <small class="text-danger" *ngIf="password!.errors?.['required']"
+          >Password is required
+        </small>
+       
+      </div>
+
+      <div *ngIf="sumitted && loginForm.get('password')?.untouched ">
+        <small class="text-danger"
+         *ngIf="sumitted && loginForm.get('password')?.errors?.['required']">Password is required</small>
+      </div>
+
+    </div>
+    
+    <div *ngIf="error" class="err">
+      <small class="text-danger">{{error}}</small>
+    </div>
+
+  
+    <div class="logbtn">
+      <button type="button"   (click)="login()" class="btn btn-primary">Login</button>
+    </div>
+
+      <hr>
+      <small class="text-secondary" style="text-align: center;display: flex;justify-content: center;">
+        OR login with social</small>
+
+    <div class="social">
+      <div class="fb">
+           <i class="fa fa-facebook-official" style="font-size:30px;margin-right: 20px;" aria-hidden="true" (click)="facebookLogin()"></i>
+      </div>
+
+      <div class="google">
+           <asl-google-signin-button></asl-google-signin-button>     
+      </div>
+    </div>
+     
+    <hr>
+    
+    <div class="regHere">
+      <small style="cursor: pointer" class="reg small" (click)="register()" 
+        >Not registered yet? create an account</small
+      >
+     </div>
+  </form>
+
+</div>

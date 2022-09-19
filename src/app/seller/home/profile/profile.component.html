@@ -1,0 +1,38 @@
+
+<app-header></app-header>
+
+<div class="bg">
+  <div class="card text-dark bg-light">
+    <div class="spinner" *ngIf="load">
+      <div class="spinner-border m-1" role="status">
+        <span class="sr-only"></span>
+      </div>
+    </div>
+    <h1 class="card-header" style="font-weight: bold;color: skyblue;">My Profile</h1>
+   
+    <div class="card-body">
+      <div>
+        <label class="form-label">Name: </label>
+        <span> {{ userProfileData?.name }}</span>
+      </div>
+      <div>
+        <label class="form-label">Email: </label>
+        <span> {{ userProfileData?.email }}</span>
+      </div>
+      <div>
+        <label class="form-label">Role: </label>
+        <span> {{ userProfileData?.role }}</span>
+      </div>
+      <div>
+        <label class="form-label">Is email Varified: </label>
+        <span style="color: green" *ngIf="verifyMail"> Verified</span>
+        <span style="color: red" *ngIf="!verifyMail"> Pending</span>
+      </div>
+      <div>
+        <label class="form-label">Company Name: </label>
+        <span> {{ userProfileData?._org?.name }}</span>
+      </div>
+    
+    </div>
+  </div>
+</div>

@@ -1,0 +1,174 @@
+<app-header></app-header>
+
+<h1>Add New Product</h1>
+
+<div class="form-group addProd">
+  <form [formGroup]="productForm">
+    <div class="prodName mb-3">
+      <label class="form-label">Product Name</label>
+      <input
+        formControlName="name"
+        [class.is-invalid]="f['name']!.invalid && f['name']!.touched"
+        type="text"
+        class="form-control"
+        name="name"
+      />
+
+      <div *ngIf="f['name']!.invalid && f['name']!.touched">
+        <small class="text-danger" *ngIf="f['name']!.errors?.['required']"
+          >Product name is required</small
+        >
+      </div>
+
+      <div *ngIf="sumitted && f['name']!.untouched">
+        <small
+          class="text-danger"
+          *ngIf="sumitted && f['name']!.errors?.['required']"
+          >Product name is required</small
+        >
+      </div>
+    </div>
+
+    <!-- <div class="prodDesc mb-3">
+        <label class="form-label">Product Description</label>
+        <textarea formControlName="description"
+        [class.is-invalid]="f['description']!.invalid && f['description']!.touched"
+         type="text" class="form-control" name="description" > </textarea>
+  
+        <div *ngIf="f['description']!.invalid && f['description']!.touched">
+          <small class="text-danger" *ngIf="f['description']!.errors?.['required']"
+            >Product Description is required</small>
+          </div>
+  
+          <div *ngIf="sumitted && f['description']!.untouched ">
+            <small class="text-danger"
+             *ngIf="sumitted && f['description']!.errors?.['required']">Product Description is required</small>
+          </div>
+  
+      </div>   -->
+
+    <div class="prodDesc mb-3">
+      <label class="form-label">Product Description</label>
+      <div class="editor">
+        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+        </ngx-editor-menu>
+        <ngx-editor
+          [editor]="editor"
+          [placeholder]="'Description...'"
+          formControlName="description"
+          [(ngModel)]="html"
+          
+        >
+        </ngx-editor>
+      </div>
+
+      <div *ngIf="f['description']!.invalid && f['description']!.touched">
+        <small
+          class="text-danger"
+          *ngIf="f['description']!.errors?.['required']"
+          >Product Description is required</small
+        >
+      </div>
+
+      <div *ngIf="sumitted && f['description']!.untouched">
+        <small
+          class="text-danger"
+          *ngIf="sumitted && f['description']!.errors?.['required']"
+          >Product Description is required</small
+        >
+      </div>
+    </div>
+
+    <div class="prodPrice mb-3">
+      <label class="form-label">Product Price</label>
+      <input
+        formControlName="price"
+        [class.is-invalid]="f['price']!.invalid && f['price']!.touched"
+        type="text"
+        class="form-control"
+        name="price"
+      />
+
+      <div *ngIf="f['price']!.invalid && f['price']!.touched">
+        <small class="text-danger" *ngIf="f['price']!.errors?.['required']"
+          >Product price is required</small
+        >
+
+        <small class="text-danger" *ngIf="f['price']!.errors?.['pattern']"
+          >only numbers are allowed</small
+        >
+      </div>
+
+      <div *ngIf="sumitted && f['price']!.untouched">
+        <small
+          class="text-danger"
+          *ngIf="sumitted && f['price']!.errors?.['required']"
+          >Product price is required</small
+        >
+      </div>
+    </div>
+
+    <!-- <div class="mb-3 prodImg">
+        <label  class="form-label">Upload Images</label>
+        <input class="form-control" 
+        type="file" 
+        (change)="onSelectFile($event)"
+        multiple
+        >
+        
+        <div *ngIf="f['photo'].touched && f['photo'].invalid">
+            <small class="text-danger" *ngIf="f['photo']!.errors?.['required']"
+            >Image is required</small>
+        </div>
+
+        <div *ngIf="sumitted && f['photo']!.untouched ">
+            <small class="text-danger"
+             *ngIf="sumitted && f['photo']!.errors?.['required']">Image is required</small>
+          </div>
+      </div> -->
+
+    <div class="mb-3 prodImg">
+      <label class="form-label">Upload Images</label>
+      <div
+        class="custom-dropzone drp"
+        ngx-dropzone
+        [multiple]="true"
+        [accept]="'image/*'"
+        (change)="onSelectFile($event)"
+      >
+        <ngx-dropzone-label>
+          <div>
+            <h2>Drop/Select Images</h2>
+          </div>
+        </ngx-dropzone-label>
+        <ngx-dropzone-image-preview
+          ngProjectAs="ngx-dropzone-preview"
+          *ngFor="let f of files"
+          [file]="f"
+          [removable]="true"
+          (removed)="onRemove(f)"
+        >
+          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-image-preview>
+      </div>
+
+      <div *ngIf="f['photo'].touched && f['photo'].invalid">
+        <small class="text-danger" *ngIf="f['photo']!.errors?.['required']"
+          >Image is required</small
+        >
+      </div>
+
+      <div *ngIf="sumitted && f['photo']!.untouched">
+        <small
+          class="text-danger"
+          *ngIf="sumitted && f['photo']!.errors?.['required']"
+          >Image is required</small
+        >
+      </div>
+    </div>
+
+    <div class="addBtn">
+      <button class="btn btn-success" (click)="addProduct()">Add</button>
+    </div>
+  </form>
+</div>

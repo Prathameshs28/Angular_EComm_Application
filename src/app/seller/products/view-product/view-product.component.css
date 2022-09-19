@@ -1,0 +1,82 @@
+
+ h1{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: skyblue;
+    text-align: center;  
+ }
+
+ i{
+    font-size: 40px;
+    color:skyblue;
+    margin: 10px 10px;
+    cursor: pointer;
+ }
+
+ .heading{
+    margin-bottom: 20px;
+ }
+    
+    .listImg{
+       
+        width: 60px;
+        height: 60px;
+       border: 2px gray solid;
+       margin: 5px 5px;
+       cursor: pointer;
+
+               
+    }
+
+   
+
+    .BigImg{
+        width: 300px;
+        height: 350px;
+         margin-left: 90px ; 
+         margin-bottom: 30px;       
+    }
+ 
+   
+    
+    .custom-slider-main{
+        display: flex;
+        overflow: hidden;    
+        scroll-behavior: smooth;
+        width: 300px;
+       
+    }
+    
+     .info-box{
+        width: 65px;
+        height:65px
+     }
+  
+
+     .card{
+      margin: 20px auto;
+      padding: 30px;
+      border: 5px solid gray;
+     
+     }
+
+
+   
+
+     .example::-webkit-scrollbar {
+      display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .example {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+   
+
+    
+   
+    
+
+ 
+    

@@ -1,0 +1,173 @@
+<app-header></app-header>
+
+<!--  <nav *ngIf="lowerHeader" class="navbar navbar-light navbar-expand-sm headNav">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <form class="d-flex">
+          <input class="form-control input-group-sm me-2" type="search"
+          [(ngModel)]="searchTerm" (keyup)="search(searchTerm)" name="searchTerm"
+          placeholder="Search Product" aria-label="Search">
+       
+        </form>   
+  
+    </div>
+  </div>
+</nav>   -->
+
+<div>
+  <div class="row row-cols-1 row-cols-md-5 g-3 m-4 list">
+    <div
+      *ngFor="
+        let data of products
+          | paginate
+            : {
+                itemsPerPage: pageLimit,
+                currentPage: pageNo,
+                totalItems: totalPages
+              };
+        let i = index
+      "
+    >
+      <div class="col">
+        <!-- card start -->
+
+        <div class="card-group">
+          <div
+            class="card"
+            [ngClass]="{
+              color1: i % 5 == 0,
+              color2: i % 5 == 1,
+              color3: i % 5 == 2,
+              color4: i % 5 == 3,
+              color5: i % 5 == 4
+            }"
+          >
+            <div class="ProductImage">
+              <ngb-carousel *ngIf="data.images.length > 1; else elseBlock">
+                <ng-template
+                  ngbSlide
+                  *ngFor="let image of data?.images; let pic = index"
+                >
+                  <div class="picsum-img-wrapper">
+                  
+                      <img
+                      class="img-fluid"
+                      src="{{ image?.url }}"
+                      alt="product Image"
+                      (click)="viewProduct(data?._id)"
+                    />        
+                
+                  </div>
+                </ng-template>
+              </ngb-carousel>
+            </div>
+
+            <ng-template #elseBlock>
+
+              <span  *ngIf="data.images[0]?.url">
+                <img 
+                src="{{ data?.images[0]?.url }}"
+                class="img-fluid"
+                alt="Image not found"
+                (click)="viewProduct(data?._id)"
+              />
+              </span>
+
+              <span *ngIf="!(data.images[0]?.url)">
+                <img 
+                src="https://t3.ftcdn.net/jpg/04/34/72/82/240_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg"
+                class="img-fluid"
+                alt="Image not found"
+                (click)="viewProduct(data?._id)"
+              />
+              </span>
+             
+            </ng-template>
+
+            <div class="card-body">
+              <h5 class="card-title" style="text-align: center">
+                {{ data?.name }}
+              </h5>
+              <p
+                class="card-text"
+                style="
+                  color: black;
+                  white-space: normal;
+                  -webkit-box-orient: vertical;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 2;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                "
+              >
+                Price: {{ data?.price | currency: "INR" }}
+              </p>
+
+              <p
+                class="card-text"
+                style="
+                  color: gray;
+                  white-space: normal;
+                  -webkit-box-orient: vertical;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 2;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                "
+              >
+              Description: <span [innerHTML]="data?.description | dompurify" ></span>   
+                <!-- Description: {{ data?.description }} -->
+              </p>
+            </div>
+
+            <div class="card-footer activityBtn">
+              <!-- <i
+              title="Add to cart"
+              class="fa fa-shopping-cart"
+              style="font-size: 30px; color:red;"
+                    
+            ></i> -->
+
+              <button
+                class="btn btn-sm btn-warning"
+                (click)="addToCart(data)"
+                style="margin-right: 5px"
+              >
+                Add to cart
+              </button>
+
+              <button class="btn btn-sm btn-success" (click)="buyNow(data)">
+                Buy Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- card end -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="page" style="display: flex">
+    <div class="pageItemSize" style="margin-right: 10px">
+      <select
+        class="form-select form-select-sm"
+        aria-label=".form-select-sm example"
+        (change)="onChangeSize($event)"
+      >
+        <option disabled selected>Set Limit</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="{{ allItems }}">All</option>
+      </select>
+    </div>
+
+    <pagination-controls
+      class="ngxPagination"
+      (pageChange)="pageChangeEvent($event)"
+    ></pagination-controls>
+  </div>
+</div>

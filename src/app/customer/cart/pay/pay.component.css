@@ -1,0 +1,19 @@
+.payBtn{
+    justify-content: center;
+    display: flex; 
+    margin-top: 10px;
+  
+}
+
+.cmnBtn{
+    margin-right: 10px;
+    width: 30%;
+}
+
+
+
+.paymentPage{
+    margin: 60px auto;
+    width: 700px;
+    
+}

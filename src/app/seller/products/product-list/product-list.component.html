@@ -1,0 +1,362 @@
+<app-header></app-header>
+
+<nav class="navbar navbar-light navbar-expand-sm headNav">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active createprodtab"
+            aria-current="page"
+            (click)="createNewProduct()"
+            >Create New Product</a
+          >
+        </li>
+      </ul>
+
+      <form class="d-flex">
+        <input
+          class="form-control input-group-sm me-2"
+          type="search"
+          [(ngModel)]="searchTerm"
+          (keyup)="search(searchTerm)"
+          name="searchTerm"
+          placeholder="Search Product"
+          aria-label="Search"
+        />
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div>
+  <div class="row row-cols-1 row-cols-md-5 g-3 m-4 list">
+    <div
+      *ngFor="
+        let data of productListData
+          | searchFilter: searchTerm
+          | paginate
+            : {
+                itemsPerPage: pageLimit,
+                currentPage: pageNo,
+                totalItems: totalPages
+              };
+        let i = index
+      "
+    >
+      <div class="col">
+        <!-- card start -->
+
+        <div class="card-group">
+          <div
+            class="card"
+            [ngClass]="{
+              color1: i % 5 == 0,
+              color2: i % 5 == 1,
+              color3: i % 5 == 2,
+              color4: i % 5 == 3,
+              color5: i % 5 == 4
+            }"
+          >
+            <div class="ProductImage">
+              <ngb-carousel *ngIf="data?.images.length > 1; else elseBlock">
+                <ng-template
+                  ngbSlide
+                  *ngFor="let image of data?.images; let pic = index"
+                >
+                  <div class="picsum-img-wrapper">
+                    <img
+                      src="{{ image?.url }}"
+                      alt="Product Image"
+                      (click)="viewProduct(data?._id)"
+                      class="img-fluid"
+                    />
+                  </div>
+                </ng-template>
+              </ngb-carousel>
+            </div>
+
+            <ng-template #elseBlock>
+              <img
+                src="{{ data?.images[0]?.url }}"
+                class="img-fluid card-img-top"
+                alt="mobile"
+                (click)="viewProduct(data?._id)"
+              />
+            </ng-template>
+
+            <div class="card-body">
+              <h5 class="card-title" style="text-align: center">
+                {{ data?.name }}
+              </h5>
+              <h6  style="text-align: center">
+               Price: {{ data?.price }}
+              </h6>
+              <p>
+
+                Description:
+                <span
+                  class="card-text"
+                  style="
+                    color: gray;
+                    white-space: normal;
+                    -webkit-box-orient: vertical;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                  "
+                  [innerHTML]="data?.description | dompurify"   
+                >
+                  <!-- Description: {{ data?.description }} -->
+                </span>
+              </p>
+            </div>
+
+            <div class="card-footer">
+              <div class="activityBtn">
+                <i
+                  title="Edit"
+                  class="fa fa-pencil-square"
+                  style="font-size: 30px; color: gray"
+                  (click)="openUpdatePopup(data?._id)"
+                ></i>
+
+                <i
+                  title="Delete"
+                  class="fa fa-trash-o"
+                  style="font-size: 30px; color: red"
+                  (click)="sweetAlertForDelete(data?._id)"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- card end -->
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="page" style="display: flex">
+      <div class="pageItemSize" style="margin-right: 10px">
+        <select
+          class="form-select form-select-sm"
+          aria-label=".form-select-sm example"
+          (change)="onChangeSize($event)"
+        >
+          <option disabled selected>Set Limit</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="{{ allItems }}">All</option>
+        </select>
+      </div>
+
+      <pagination-controls
+        class="ngxPagination"
+        (pageChange)="pageChangeEvent($event)"
+      ></pagination-controls>
+    </div>
+  </div>
+
+  <!-- Update Product Model -->
+
+  <div
+    class="modal backdrop prodUpdate"
+    tabindex="-1"
+    role="dialog"
+    [ngStyle]="{ display: displayStyle }"
+    style=" overflow: scroll"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" style="color: red">Update Product Details</h4>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="productUpdateForm">
+            <div class="prodName mb-3">
+              <label class="form-label">Product Name</label>
+              <input
+                formControlName="name"
+                [class.is-invalid]="f['name']!.invalid && f['name']!.touched"
+                type="text"
+                class="form-control"
+                name="name"
+              />
+
+              <div *ngIf="f['name']!.invalid && f['name']!.touched">
+                <small
+                  class="text-danger"
+                  *ngIf="f['name']!.errors?.['required']"
+                  >Product name is required</small
+                >
+              </div>
+
+              <div *ngIf="sumitted && f['name']!.untouched">
+                <small
+                  class="text-danger"
+                  *ngIf="sumitted && f['name']!.errors?.['required']"
+                  >Product name is required</small
+                >
+              </div>
+            </div>
+
+            <div class="prodDesc mb-3">
+              <label class="form-label">Product Description</label>
+              <!-- <textarea
+                formControlName="description"
+                [class.is-invalid]="
+                  f['description']!.invalid && f['description']!.touched
+                "
+                type="text"
+                class="form-control"
+                name="description"
+
+              >
+              </textarea> -->
+
+              <div class="editor">
+                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                </ngx-editor-menu>
+                <ngx-editor
+                  [editor]="editor"
+                  [placeholder]="'Description...'"
+                  formControlName="description"
+                                   
+                >
+                </ngx-editor>
+              </div>
+
+
+
+              <div
+                *ngIf="f['description']!.invalid && f['description']!.touched"
+              >
+                <small
+                  class="text-danger"
+                  *ngIf="f['description']!.errors?.['required']"
+                  >Product name is required</small
+                >
+              </div>
+
+              <div *ngIf="sumitted && f['description']!.untouched">
+                <small
+                  class="text-danger"
+                  *ngIf="sumitted && f['description']!.errors?.['required']"
+                  >Product Description is required</small
+                >
+              </div>
+            </div>
+
+            <div class="prodPrice mb-3">
+              <label class="form-label">Product Price</label>
+              <input formControlName="price"
+              [class.is-invalid]="f['price']!.invalid && f['price']!.touched"
+               type="text" class="form-control" name="price" />
+        
+              <div *ngIf="f['price']!.invalid && f['price']!.touched">
+                <small class="text-danger" *ngIf="f['price']!.errors?.['required']"
+                  >Product price is required</small>
+      
+                  <small class="text-danger" *ngIf="f['price']!.errors?.['pattern']"
+                >only numbers are allowed</small>
+                </div>
+        
+                <div *ngIf="sumitted && f['price']!.untouched ">
+                  <small class="text-danger"
+                   *ngIf="sumitted && f['price']!.errors?.['required']">Product price is required</small>
+                </div>
+        
+            </div>
+
+
+
+          </form>
+
+          <form [formGroup]="updateImgForm">
+            <div>
+              <label class="form-label">Product Images</label>
+              <div class="imageUpdate">
+                <div *ngFor="let pic of images; let i = index">
+                  <img
+                    src="{{ pic.url }}"
+                    class="img-fluid imgBox"
+                    alt="mobile"
+                    [ngClass]="{ imgBoxBlur: makeBlur(pic.public_id) }"
+                  />
+
+                  <i
+                    title="Remove"
+                    class="fa fa-times-circle-o del"
+                    (click)="deleteImg(pic.public_id)"
+                    [ngClass]="{ changeIconColour: iconColor(pic.public_id) }"
+                  ></i>
+                </div>
+
+                <!-- image preview after select -->
+
+                <!-- <div class="imageUpdate">
+                  <div *ngFor="let preImg of imageUrl; let i = index">
+                    <img
+                      [src]="preImg"
+                      class="imgBox newAddedImg"
+                      alt="mobile"
+                    />
+
+                    <i
+                      title="Remove"
+                      class="fa fa-times-circle-o del"
+                      (click)="deleteSelectedImg(i)"
+                    ></i>
+                  </div>
+                </div> -->
+
+                <!--  End image preview after select -->
+                
+              </div>
+
+              <!-- <div class="addNewImg">
+                <label class="form-label">Add new Images</label>
+                <input
+                  class="form-control"
+                  type="file"
+                  (change)="onSelectFile($event)"
+                  multiple
+                />
+              </div> -->
+
+              <div>
+                <div class="custom-dropzone drp" ngx-dropzone [multiple]="true" [accept]="'image/*'" (change)="onSelectFile($event)">
+                  <ngx-dropzone-label>
+                    <div>
+                      <h2>Drop/Select Images</h2>
+                    </div>
+                  </ngx-dropzone-label>
+                  <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-image-preview>
+                  </div> 
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer btn">
+          <button
+            type="button"
+            class="btn btn-warning"
+            (click)="updateProduct()"
+          >
+            Update
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="close()">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

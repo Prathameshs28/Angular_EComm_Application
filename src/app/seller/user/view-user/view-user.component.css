@@ -1,0 +1,51 @@
+.bg {
+    margin-top: 5%;
+  }
+  
+  .loutBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* float: right; */
+    margin-right: 5px;
+    margin-top: 5px;
+  }
+  
+  .card {
+    margin-top: 20px;
+    text-align: center;
+    width: 500px;
+    height: 320px;
+    margin: 20px auto;
+  }
+  
+  .card-body {
+    text-align: left;
+    margin: 20px 10px;
+  }
+  
+  label {
+    font-weight: bold;
+    font-size: larger;
+  }
+  
+  .spinner {
+    text-align: left;
+    margin: 1px;
+    padding: 3px;
+    display: flex;
+    position: fixed;
+    color: skyblue;
+  }
+  
+  .list{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    /* float: right; */
+    margin:5px;
+    
+    
+  }
+
+  

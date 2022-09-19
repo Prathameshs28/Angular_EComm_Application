@@ -1,0 +1,136 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+
+<app-header></app-header>
+
+<div class="login border border-5 rounded-3">
+  <form [formGroup]="loginForm">
+    <h1>Login</h1>
+
+    <div class="email">
+      <label class="form-label">Email address</label>
+
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        formControlName="email"
+        [class.is-invalid]="
+          loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+        "
+        placeholder="Enter registered email"
+      />
+
+      <div *ngIf="email!.invalid && email!.touched">
+        <small class="text-danger" *ngIf="email!.errors?.['required']"
+          >Email is required</small
+        >
+
+        <small class="text-danger" *ngIf="email!.errors?.['pattern']"
+          >Email must be a valid email address</small
+        >
+      </div>
+      <div *ngIf="sumitted && loginForm.get('email')?.untouched">
+        <small
+          class="text-danger"
+          *ngIf="sumitted && loginForm.get('email')?.errors?.['required']"
+          >Email is required</small
+        >
+      </div>
+    </div>
+
+    <div class="password">
+      <label class="form-label">Password</label>
+
+      <input
+        type="password"
+        formControlName="password"
+        [class.is-invalid]="
+          loginForm.get('password')?.invalid &&
+          loginForm.get('password')?.touched
+        "
+        placeholder="Enter password"
+        class="form-control"
+        name="password"
+      />
+
+      <div *ngIf="password!.invalid && password!.touched">
+        <small class="text-danger" *ngIf="password!.errors?.['required']"
+          >Password is required
+        </small>
+      </div>
+
+      <div *ngIf="sumitted && loginForm.get('password')?.untouched">
+        <small
+          class="text-danger"
+          *ngIf="sumitted && loginForm.get('password')?.errors?.['required']"
+          >Password is required</small
+        >
+      </div>
+
+      <div>
+        <p class="btn forgotPass" type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Forgot password?</p>
+      </div>
+    </div>
+
+    <div *ngIf="error" class="err">
+      <small class="text-danger">{{ error }}</small>
+    </div>
+
+    <div class="logbtn">
+      <button type="button" (click)="login()" class="btn btn-primary">
+        Login
+      </button>
+    </div>
+    <hr />
+    <div class="regHere">
+      <small style="cursor: pointer" class="reg small" (click)="register()"
+        >Not registered yet? create an account</small
+      >
+    </div>
+  </form>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade "   id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Forgot Password</h5>
+        <button type="button" class="btn-close" (click)="closeForgotPass()" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <h1>Password Recovery</h1>
+        <p>
+          Enter your email with this account
+        </p>
+        <form [formGroup]="forgotPassForm">
+
+          <div class="form-floating mb-3">
+            <input type="email"  name="email"
+            formControlName="email"
+             class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+          </div>   
+          
+          <div>
+            <span style="color: red;">{{
+              showForgotPasswordError()
+            }}</span>
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeForgotPass()" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="forgotPassConfirm()">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>

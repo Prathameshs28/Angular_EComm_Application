@@ -1,0 +1,77 @@
+<nav class="navbar navbar-light navbar-expand-sm headNav">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active tab"
+            *ngIf="!loginFlag"
+            aria-current="page"
+            (click)="login()"
+            >Login</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active tab"
+            *ngIf="loginFlag"
+            aria-current="page"
+            (click)="toProfile()"
+            >My Profile</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active tab" (click)="productList()"
+            >All Products</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <!-- <a class="nav-link active tab"  (click)="showCart()">Cart</a>     -->
+          <!-- <i
+              title="Add to cart"
+              class="fa fa-shopping-cart"
+              style="font-size: 30px; color:white;"
+              (click)="showCart()" 
+            >
+          
+          </i>  -->
+
+          <div
+          
+            class="btn position-relative"
+            style=" background-color: #868C96;  border-radius: 10px  ; margin-left: 10px; "
+          >
+            <i
+              title="Add to cart"
+              class="fa fa-shopping-cart"
+              style="font-size: 20px; color: white"
+              (click)="showCart()"
+            >
+            </i>
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >
+              <!-- {{ storageService.cartItems }} -->
+
+              {{counter}}
+              
+            </span>
+          </div>
+        </li>
+      </ul>
+
+      <li *ngIf="loginFlag" class="userName" style="color: white">
+        Hello {{ storageService.userName }}
+      </li>
+
+      <i
+        class="fa fa-sign-out"
+        *ngIf="!logOutFlag"
+        title="Logout"
+        aria-hidden="true"
+        (click)="logout()"
+      ></i>
+    </div>
+  </div>
+</nav>

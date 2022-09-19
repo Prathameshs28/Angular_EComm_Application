@@ -1,0 +1,119 @@
+    
+
+    <div class="paymentPage">
+      <div class="card text-center">
+        <div class="card-header">
+          <h1 class="h1">Make Payment</h1>
+        </div>
+        <div class="card-body">
+          <p class="card-title" style="color: green;" >Enter card details and pay</p>
+
+          <form [formGroup]="cardForm" class="form">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-floating mb-3">
+                  <input
+                    formControlName="cardNumber"
+                    type="text"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="enter card number"
+                    maxlength="16"
+                    name="cardNumber"
+                  />
+                  <label for="floatingInput">Card Number</label>
+                </div>
+
+                <div>
+                  <span style="color: red">{{
+                    showCardNumberError()
+                  }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    formControlName="expiry"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="00/00"
+                    (keyup)="onKeyCardExpiry($event)"
+                    name="expiry"
+                  maxlength="7"
+                  />
+                  <label for="floatingInput">MM / YYYY</label>
+                </div>
+                <div>
+                  <span style="color: red">{{
+                    showCardExpiryError()
+                  }}</span>
+                </div>
+              </div>
+              <div class="col-6">
+
+                <div class="form-floating mb-3">
+                  <input
+                    type="password"
+                    formControlName="cvv"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="CVV"
+                    maxlength="3"
+                    name="cvv"
+                  />
+                  <label for="floatingInput">CVV</label>
+                </div>
+
+                <div>
+                  <span style="color: red">{{
+                    showCardCvvError()
+                  }}</span>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    formControlName="nameOnCard"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="name"
+                    name="nameOnCard"
+                  />
+                  <label for="floatingInput"
+                    >Card Holder Name</label
+                  >
+                </div>
+
+                <div>
+                  <span style="color: red;">{{
+                    showCardNameError()
+                  }}</span>
+                </div>
+              </div>
+            </div>
+
+            
+            </form>
+                      
+
+        </div>
+        <div>
+          <span *ngIf="error" style="color: red;">{{error}}</span>
+        </div>
+        <div class="card-footer text-muted mt-4">
+          <div class="col-12 payBtn">
+            <div class="btn btn-success cmnBtn" (click)="pay()">Pay</div>
+            <div class="btn btn-secondary cmnBtn" (click)="cancel()">Cancel</div>
+          </div>
+        </div>
+      </div>
+    </div>

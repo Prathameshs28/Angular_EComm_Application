@@ -1,0 +1,326 @@
+<app-header></app-header>
+
+<nav class="navbar navbar-light navbar-expand-sm headNav">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+        <!-- <li class="nav-item">
+            <a class="nav-link active tab" (click)="backToProfile()"  aria-current="page" >My Profile</a>
+          </li> -->
+        <li class="nav-item">
+          <a
+            class="nav-link active tab"
+            (click)="openPopupAddNewAdd()"
+            aria-current="page"
+            >Add New Address</a
+          >
+        </li>
+      </ul>
+      <!-- <i class="fa fa-sign-out" title="Logout" aria-hidden="true" ></i> -->
+    </div>
+  </div>
+</nav>
+
+<div>
+  <div class="row row-cols-1 row-cols-md-5 g-3 m-4 list">
+    <div *ngFor="let add of allAddresses; let i = index">
+      <div class="col">
+        <!-- card start -->
+
+        <div class="card-group">
+          <div class="card">
+            <div class="card-header">
+              <div class="label" style="text-align: center">
+                Address: {{ i + 1 }}
+              </div>
+            </div>
+
+            <div class="card-body" (click)="showAddress(add?._id)">
+              <h6 class="card-subtitle mb-2 text-muted">
+                <span class="label">Street: </span>{{ add?.street }}
+              </h6>
+              <h6 class="card-subtitle mb-2 text-muted">
+                <span class="label">Address Line 2: </span
+                >{{ add?.addressLine2 }}
+              </h6>
+              <h6 class="card-subtitle mb-2 text-muted">
+                <span class="label">City: </span>{{ add?.city }}
+              </h6>
+              <h6 class="card-subtitle mb-2 text-muted">
+                <span class="label">State: </span>{{ add?.state }}
+              </h6>
+              <h6 class="card-subtitle mb-2 text-muted">
+                <span class="label">Pin: </span>{{ add?.pin }}
+              </h6>
+            </div>
+
+            <div class="card-footer">
+              <i
+                title="Edit"
+                class="fa fa-pencil-square"
+                style="
+                  font-size: 24px;
+                  color: gray;
+                  margin-left: 25px;
+                  margin-right: 25px;
+                "
+                (click)="updateAddress(i)"
+              ></i>
+
+              <i
+                title="Delete"
+                class="fa fa-trash-o"
+                style="font-size: 24px; color: red"
+                (click)="deleteAddress(add?._id)"
+              ></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- card end -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal  for add new address-->
+
+<div
+  class="modal backdrop"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: displayStyle }"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add New Address</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addressForm">
+          <div class="addressFields">     
+              
+                <div class="row">
+                  <div class="col-6">
+                    <label class="form-label">Address Line 1</label>
+                    <input
+                      formControlName="street"
+                      name="street"
+                      [class.is-invalid]="
+                        addressForm.get('street')?.invalid &&
+                        addressForm.get('street')?.touched
+                      "
+                      type="text"
+                      class="form-control"
+                    />
+
+                    <div
+                      *ngIf="
+                        addressForm.get('street')!.invalid &&
+                        addressForm.get('street')?.touched
+                      "
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="addressForm.get('street')?.errors?.['required']"
+                        >Address Line 1 is required</small
+                      >
+                    </div>
+
+                    <div
+                      *ngIf="sumitted && addressForm.get('street')?.untouched"
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="sumitted && addressForm.get('street')?.errors?.['required']"
+                        >Address Line 1 is mendatory</small
+                      >
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <label class="form-label">Address Line 2</label>
+
+                    <input
+                      formControlName="addressLine2"
+                      [class.is-invalid]="
+                        addressForm.get('addressLine2')?.invalid &&
+                        addressForm!.get('addressLine2')?.touched
+                      "
+                      name="addressLine2"
+                      type="text"
+                      class="form-control"
+                    />
+
+                    <div
+                      *ngIf="
+                        addressForm.get('addressLine2')!.invalid &&
+                        addressForm.get('addressLine2')!.touched
+                      "
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="addressForm.get('addressLine2')!.errors?.['required']"
+                        >Address Line 2 is required</small
+                      >
+                    </div>
+
+                    <div
+                      *ngIf="
+                        sumitted && addressForm.get('addressLine2')?.untouched
+                      "
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="sumitted && addressForm.get('addressLine2')?.errors?.['required']"
+                        >Address Line 2 is required</small
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-6">
+                    <label class="form-label">City</label>
+                    <input
+                      formControlName="city"
+                      [class.is-invalid]="
+                        addressForm.get('city')?.invalid &&
+                        addressForm!.get('city')?.touched
+                      "
+                      name="city"
+                      type="text"
+                      class="form-control"
+                    />
+
+                    <div
+                      *ngIf="
+                        addressForm.get('city')!.invalid &&
+                        addressForm.get('city')!.touched
+                      "
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="addressForm.get('city')!.errors?.['required']"
+                        >City is required</small
+                      >
+                    </div>
+
+                    <div *ngIf="sumitted && addressForm.get('city')?.untouched">
+                      <small
+                        class="text-danger"
+                        *ngIf="sumitted && addressForm.get('city')?.errors?.['required']"
+                        >City is required</small
+                      >
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label">State</label>
+                    <input
+                      formControlName="state"
+                      [class.is-invalid]="
+                        addressForm.get('state')?.invalid &&
+                        addressForm.get('state')?.touched
+                      "
+                      name="state"
+                      type="text"
+                      class="form-control"
+                    />
+
+                    <div
+                      *ngIf="
+                        addressForm.get('state')?.invalid &&
+                        addressForm.get('state')!.touched
+                      "
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="addressForm.get('state')!.errors?.['required']"
+                        >State is required</small
+                      >
+                    </div>
+
+                    <div
+                      *ngIf="sumitted && addressForm.get('state')?.untouched"
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="sumitted && addressForm.get('state')?.errors?.['required']"
+                        >State is required</small
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-3">
+                    <label class="form-label">Pin Code</label>
+                    <input
+                      formControlName="pin"
+                      [class.is-invalid]="
+                        addressForm.get('pin')?.invalid &&
+                        addressForm.get('pin')?.touched
+                      "
+                      name="pin"
+                      type="text"
+                      class="form-control"
+                    />
+
+                    <div
+                      *ngIf="
+                        addressForm.get('pin')!.invalid &&
+                        addressForm!.get('pin')!.touched
+                      "
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="addressForm.get('pin')!.errors?.['required']"
+                        >Pin is required</small
+                      >
+                      <small
+                        class="text-danger"
+                        *ngIf="addressForm.get('pin')!.errors?.['pattern']"
+                        >Pin code must be 6 digits</small
+                      >
+                    </div>
+
+                    <div *ngIf="sumitted && addressForm.get('pin')?.untouched">
+                      <small
+                        class="text-danger"
+                        *ngIf="sumitted && addressForm?.get('pin')?.errors?.['required']"
+                        >Pin is required</small
+                      >
+                    </div>
+                  </div>
+                </div>
+             
+           
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          *ngIf="!updateBtn"
+          type="button"
+          class="btn btn-success"
+          (click)="addNewAddress()"
+        >
+          ADD
+        </button>
+
+        <button
+          *ngIf="updateBtn"
+          type="button"
+          class="btn btn-warning"
+          (click)="updateCustAddress()"
+        >
+          Update
+        </button>
+
+        <button type="button" class="btn btn-danger" (click)="closePopup()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

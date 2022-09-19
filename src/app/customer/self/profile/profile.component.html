@@ -1,0 +1,258 @@
+<app-header></app-header>
+
+<nav class="navbar navbar-light navbar-expand-sm headNav">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active tab"
+            (click)="openPopupCustUpdateDetails()"
+            aria-current="page"
+            >Update Profile</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active tab"
+            (click)="showAddresses()"
+            aria-current="page"
+            >Your addresses</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link active tab"
+            (click)="showOrder()"
+            aria-current="page"
+            >Your Orders</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="bg">
+  <div class="card text-dark bg-light">
+    <h1 class="card-header" style="font-weight: bold; color: skyblue">
+      My Profile
+    </h1>
+
+    <div class="card-body info">
+      <div style="cursor: pointer">
+        <label class="form-label" style="margin-left: 30px"
+          >Profile Picture</label
+        >
+
+        <!-- <img src="{{ userProfileData?.picture }}" alt="Profile " /> -->
+
+        <ngx-avatar
+          size="200"
+          name="{{ userProfileData?.name }}"
+          src="{{ userProfileData?.picture }}"
+          (click)="openPopup()"
+          borderColor="black"
+          bgColor="skyblue"
+        ></ngx-avatar>
+
+        <div style="margin: 20px 30px">
+          <span
+            class="btn btn-sm  rmProfilePicture"    
+            (click)="deleteProfileImgSweet()"
+            >Remove Profile Picture</span
+          >
+        </div>
+
+        <!-- (clickOnAvatar)="changeProfilePicture(userProfileData?._id)"   [round]="false" -->
+      </div>
+
+      <div>
+        <label class="form-label">Name: </label>
+        <span> {{ userProfileData?.name }}</span>
+      </div>
+      <div>
+        <label class="form-label">Email: </label>
+        <span> {{ userProfileData?.email }}</span>
+      </div>
+
+      <div style="margin: 20px 40px">
+        <span
+
+          class="btn btn-sm deleteAccount"
+          style="color: red"
+          (click)="deleteAccoutSweet()"
+          >Delete account</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal  for profile picture-->
+
+<div
+  class="modal profileUpdate backdrop"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: displayStyle }"
+  style="padding: 15px; overflow: scroll"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add new Images</h4>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="imageUpdateForm">
+
+        <div class="addNewImg">
+          <label class="form-label">Add new Images</label>
+          <input
+            class="form-control"
+            type="file"
+            (change)="onSelectFile($event)"
+          />
+
+          <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="1"
+            format="jpeg"
+            (imageCropped)="imageCropped($event)"
+          ></image-cropper>
+
+          <h3
+            *ngIf="imageSelected"
+            style="text-align: center; margin: 10px"
+            class="text-success"
+          >
+            Preview
+          </h3>
+          <img
+            class="cropedImgPreview"
+            [src]="croppedImage"
+            [style.border]="croppedImage ? '1px solid black' : 'none'"
+          />
+        </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-warning"
+          (click)="updateProfilePicture()"
+        >
+          Update
+        </button>
+        <button type="button" class="btn btn-danger" (click)="closePopup()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal  for update user details-->
+
+<div
+  class="modal updateCust backdrop"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: custdetailsdisplayStyle }"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Update your Details</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editForm">
+          <div class="fullName">
+            <label class="form-label">Full Name</label>
+
+            <input
+              formControlName="name"
+              [class.is-invalid]="
+                editForm.get('name')?.invalid && editForm.get('name')?.touched
+              "
+              type="text"
+              class="form-control"
+              name="name"
+            />
+
+            <div *ngIf="name!.invalid && name!.touched">
+              <small class="text-danger" *ngIf="name!.errors?.['required']"
+                >Full name name is required</small
+              >
+              <small class="text-danger" *ngIf="name!.errors?.['pattern']"
+                >only alphabets are allowed</small
+              >
+            </div>
+
+            <div *ngIf="sumitted && editForm.get('name')?.untouched">
+              <small
+                class="text-danger"
+                *ngIf="sumitted && editForm.get('name')?.errors?.['required']"
+                >Full name name is required</small
+              >
+            </div>
+          </div>
+
+          <div class="email">
+            <label class="form-label">Email address</label>
+            <input
+              formControlName="email"
+              type="email"
+              [class.is-invalid]="
+                editForm.get('email')?.invalid && editForm.get('email')?.touched
+              "
+              class="form-control"
+              name="email"
+            />
+
+            <div *ngIf="email!.invalid && email!.touched">
+              <small class="text-danger" *ngIf="email!.errors?.['required']"
+                >Email is required</small
+              >
+              <small class="text-danger" *ngIf="email!.errors?.['pattern']"
+                >Email must be a valid email address</small
+              >
+            </div>
+
+            <div *ngIf="sumitted && editForm.get('email')?.untouched">
+              <small
+                class="text-danger"
+                *ngIf="sumitted && editForm.get('email')?.errors?.['required']"
+                >Email is required</small
+              >
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <div *ngIf="error">
+          <span style="color: red; margin-left: 2px">{{ error }}</span>
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-warning"
+          (click)="updateUserDetails()"
+        >
+          Update
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="closePopupCustUpdateDetails()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

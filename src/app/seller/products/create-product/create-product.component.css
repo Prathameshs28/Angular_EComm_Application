@@ -1,0 +1,51 @@
+.addProd{
+    width: 600px;
+    height: auto;
+    border: solid gray 2px;
+    border-radius: 4px;
+    margin: 10px auto;
+    padding: 30px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+
+
+h1{
+        
+    color: skyblue;
+    text-align: center;  
+    margin:10px auto;
+    padding: 10px;
+ }
+
+ .addBtn{
+   
+    justify-content: center;
+    display: flex;
+
+}
+
+
+ button {
+  
+    width: 120px;
+    margin-top: 20px;
+    
+ }
+
+
+ .drp{
+    height: 150px;
+    color:gray;   
+    background-color: #E2E5DE;
+ }
+
+
+.editor{
+   border: 1px solid gray;
+   padding: 5px;
+   border-radius: 5px;
+}
+
+

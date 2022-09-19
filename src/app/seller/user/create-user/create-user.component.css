@@ -1,0 +1,43 @@
+.create{
+    border-color:skyblue;
+    width: 500px;
+    padding: 20px;
+    margin:25px auto ;
+      
+    }
+
+h1{
+    text-align: center;
+    color:skyblue;
+    margin-bottom: 40px;
+}
+input{
+    margin: 3px 2px;
+    
+}
+
+.button{
+   
+    justify-content: center;
+    display: flex;
+
+}
+
+button{
+    margin:10px 10px ;
+    width: 160px;
+}
+.w3-modal-content{
+    width: 400px;
+    margin-top: 7%;
+    border: skyblue solid 1px;
+    padding: 10px; 
+    border-radius: 7px;
+   
+}
+
+.w3-modal-content input{
+    width: 93%;
+  
+}
+

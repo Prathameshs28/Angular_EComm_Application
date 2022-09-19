@@ -1,0 +1,102 @@
+<app-header></app-header>
+<div class="create border border-5 rounded-3" >
+    <form [formGroup]="createUserForm">
+      <h1>Create New User</h1>
+  
+      <div class="fullName">
+        <label class="form-label">Full Name</label>
+  
+        <input formControlName="name" 
+        [class.is-invalid]="createUserForm.get('name')?.invalid && createUserForm.get('name')?.touched " 
+        type="text" class="form-control" name="name" />
+  
+        <div *ngIf="name!.invalid && name!.touched">
+          <small class="text-danger" *ngIf="name!.errors?.['required']"
+            >Full name name is required</small>
+          <small class="text-danger" *ngIf="name!.errors?.['pattern']"
+            >only alphabets are allowed</small>
+        </div>
+  
+        <div *ngIf="sumitted && createUserForm.get('name')?.untouched ">
+          <small class="text-danger"
+           *ngIf="sumitted && createUserForm.get('name')?.errors?.['required']">Full name name is required</small>
+        </div>
+        
+      </div>
+      
+      <div class="role">
+        <label class="form-label">Role</label>
+        <input formControlName="role"
+        [class.is-invalid]="createUserForm.get('role')?.invalid && createUserForm.get('role')?.touched"
+         type="text" class="form-control" name="role" value="user"  />
+  
+        <div *ngIf="role!.invalid && role!.touched">
+          <small class="text-danger" *ngIf="role!.errors?.['required']"
+            >role is required</small>
+          </div>
+  
+          <div *ngIf="sumitted && createUserForm.get('role')?.untouched ">
+            <small class="text-danger" 
+             *ngIf="sumitted && createUserForm.get('role')?.errors?.['required']">role is required</small>
+          </div>
+  
+      </div>
+  
+      <div class="email">
+        <label class="form-label">Email address</label>
+        <input formControlName="email" type="email" 
+        [class.is-invalid]="createUserForm.get('email')?.invalid && createUserForm.get('email')?.touched"
+        class="form-control" name="email" />
+  
+        <div *ngIf="email!.invalid && email!.touched">
+          <small class="text-danger" *ngIf="email!.errors?.['required']"
+            >Email is required</small
+          >
+          <small class="text-danger" *ngIf="email!.errors?.['pattern']"
+            >Email must be a valid email address</small
+          >
+        </div>
+  
+        <div *ngIf="sumitted && createUserForm.get('email')?.untouched ">
+          <small class="text-danger"
+           *ngIf="sumitted && createUserForm.get('email')?.errors?.['required']">Email is required</small>
+        </div>
+  
+      </div>
+  
+      <div class="password">
+        <label class="form-label">Password</label>
+        <input formControlName="password" 
+        [class.is-invalid]="createUserForm.get('password')?.invalid && createUserForm.get('password')?.touched"
+        type="password" class="form-control" name="password" />
+  
+        <div *ngIf="password!.invalid && password!.touched">
+          <small class="text-danger" *ngIf="password!.errors?.['required']"
+            >Password is required
+          </small>
+          <small class="text-danger" *ngIf="password!.errors?.['pattern']"
+            >Password should be aplhanumeric(numbers, lower and upper characters
+            and special symbol) and minimum 8 characters</small
+          >
+        </div>
+  
+        <div *ngIf="sumitted && createUserForm.get('password')?.untouched ">
+          <small class="text-danger"
+           *ngIf="sumitted && createUserForm.get('password')?.errors?.['required']">Password is required</small>
+        </div>
+  
+      </div>
+  
+      <div class="button">
+        <button type="submit"  class="btn btn-primary" (click)="createNew()">Create</button>
+       </div>
+     
+  
+  
+      <div *ngIf="error">
+        <small class="text-danger">{{error}}</small>
+      </div>
+      
+      </form>
+  </div>
+  
