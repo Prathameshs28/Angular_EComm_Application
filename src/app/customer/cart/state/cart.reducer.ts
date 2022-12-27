@@ -16,10 +16,7 @@ const _cartReducer = createReducer(
   initialState,
 
   on(addProductToCart, (state, action) => {
-    // let product:CartProducts[] = [...state.cartProduct];
-    // product.push(action.products);
-
-    // console.log(product);
+   
 
     return {
       ...state,

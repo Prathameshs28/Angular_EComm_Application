@@ -8,10 +8,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { RecaptchaV3Module } from 'ng-recaptcha';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent],
+  declarations: [LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

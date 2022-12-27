@@ -118,27 +118,23 @@ export class ProductListComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          // console.log(res);
           this.allData = res;
 
-          this.productListData = this.allData?.results; // get array of product
-          this.searchAllData = this.productListData; // for search operation
+          this.productListData = this.allData?.results; 
+          this.searchAllData = this.productListData; 
           this.totalPages = this.allData?.totalResults;
 
-          this.allItems = this.allData?.totalResults; // for all items display
-          // console.log(this.allItems);
+          this.allItems = this.allData?.totalResults; 
 
           console.log(this.productListData);
         },
         error: (err: any) => {
-          // this.error = err;
           console.log(err);
         },
       });
   }
 
   viewProduct(id: any) {
-    // console.log('Mobile ID: ', id);
     this.pageService.setViewFlag(true);
 
     this.pageService.setPageNumber(this.pageNo);
@@ -157,7 +153,6 @@ export class ProductListComponent implements OnInit {
           this.getProductList(this.pageLimit, this.pageNo);
         },
         error: (err: any) => {
-          // this.error = err;
           console.log(err);
         },
       });
@@ -195,37 +190,16 @@ export class ProductListComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.getData = res;
-
-
-          //  this.htmlDesc = this.getData.description;
-            
-
-          //  const jsonDoc = toDoc( this.htmlDesc);
-
-          // console.log(jsonDoc)
-
-          // const html = toHTML(jsonDoc, schema);
-          // console.log(html)
-            // var oParser = new DOMParser();
-            // var oDOM = oParser.parseFromString(this.htmlDesc, "text/html");
-            // var text = oDOM.body.innerText;
-            // console.log(text);
-
-          // console.log(this.getData);
-
           this.images = this.getData.images;
-          // console.log(this.images);
 
           this.productUpdateForm.setValue({
             name: this.getData.name,
             description: this.getData.description,
-            // description:JSON.stringify(jsonDoc),
             price: this.getData.price,
 
           });
         },
         error: (err: any) => {
-          // this.error = err;
           console.log(err);
         },
       });
@@ -252,7 +226,6 @@ export class ProductListComponent implements OnInit {
             this.closePopup();
           },
           error: (err: any) => {
-            // this.error = err;
 
             console.log(err);
           },
@@ -267,7 +240,6 @@ export class ProductListComponent implements OnInit {
     this.closePopup();
   }
 
-  // delete image while updating
 
   deleteImg(publicID: any) {
     console.log(publicID);
@@ -276,7 +248,6 @@ export class ProductListComponent implements OnInit {
       this.publicIdArr.splice(index, 1);
     } else {
       this.publicIdArr.push(publicID);
-      // console.log(this.publicIdArr);
     }
   }
 
@@ -291,14 +262,9 @@ export class ProductListComponent implements OnInit {
   // ----------------------------------------------------------------
 
   updateProductImage() {
-    // console.log('product image update');
-
-    // console.log(this.targetImages);
-
-    // this.updateImgForm.controls['photo'].setValue(this.targetImages);
+   
 
     const fd = new FormData();
-    // console.log(this.updateImgForm.value.photo);
     for (let i = 0; i < this.updateImgForm.value.photo?.length; i++) {
       fd.append('new_images', this.updateImgForm.value.photo[i]);
     }
@@ -317,14 +283,12 @@ export class ProductListComponent implements OnInit {
       )
       .subscribe({
         next: (data: any) => {
-          // console.log(data);
           this.getProductList(this.pageLimit, this.pageNo);
           this.images = data.images;
           this.imageUrl = [];
           this.targetImages = '';
         },
         error: (err: any) => {
-          // this.error = err.error.message;
           console.log(err);
         },
       });
@@ -332,42 +296,17 @@ export class ProductListComponent implements OnInit {
 
   onSelectFile(e: any) {
 
-    this.files.push(...e.addedFiles); // dropzone  
+    this.files.push(...e.addedFiles);  
 
     if (this.files[0]){
-      // console.log(this.files);
       const imageS = this.files;
       this.updateImgForm.controls['photo'].setValue(imageS);
     }
 
-    // if (e.target.files && e.target.files[0]) {
-    //   this.targetImages = e.target.files;
-
-    //   var fileLength = e.target.files.length;
-
-    //   for (let i = 0; i < fileLength; i++) {
-    //     var reader = new FileReader();
-    //     reader.onload = (event: any) => {
-    //       this.imageUrl.push(event.target.result);
-    //     };
-    //     reader.readAsDataURL(e.target.files[i]);
-    //   }
-    // }
-
+   
 
   }
 
-  // deleteSelectedImg(id: any) {
-  //   this.imageUrl.splice(id, 1);
-  //   // console.log(id);
-
-  //   var newFileList = Array.from(this.targetImages);
-
-  //   newFileList.splice(id, 1);
-  //   this.targetImages = newFileList;
-
-  //   // console.log('after delete: ',this.targetImages)
-  // }
 
 
   onRemove(event:any) {
@@ -378,7 +317,6 @@ export class ProductListComponent implements OnInit {
   //----- Pagination-----
 
   pageChangeEvent(event: number) {
-    // console.log('page no clicked: ', event);
     this.pageService.setViewFlag(false);
     this.pageNo = event;
 
@@ -402,7 +340,6 @@ export class ProductListComponent implements OnInit {
   search(value: string): void {
     this.searchAllData = this.searchAllData.filter((val: any) => {
       val.name.toLowerCase().includes(value);
-      // console.log(val)
     });
   }
 }

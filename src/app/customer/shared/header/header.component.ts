@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { getCartProd, getCounter } from '../../cart/state/cart.selector';
 import { CartState } from '../../cart/state/cart.state';
-// import { AppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-header',
@@ -49,19 +48,7 @@ export class HeaderComponent implements OnInit {
       }
 
 
-        // if(this.storageService.checkCartItemsInLocal()){
-        //   let len:any= this.storageService.getLocalCart();
-
-        //   len= JSON.parse(len);
-    
-        //   this.storageService.cartItems = len?.length;
-    
-        //   // console.log('len: ',len?.length);
-        // }else{
-        //   this.storageService.cartItems =0;
-        // }
-
-        
+      
 
         this.store.select(getCounter).subscribe((counter)=>{
           // console.log('counter is called',counter) ;
@@ -106,12 +93,7 @@ export class HeaderComponent implements OnInit {
             localStorage.removeItem(i);
         }
 
-      // localStorage.removeItem('ORDERID');   
-      // localStorage.removeItem('BuyNowProd');  
-      // localStorage.removeItem('userName');
-      // localStorage.removeItem('CustomerData');
-      // localStorage.removeItem('cartState');
-
+  
       this.toastr.success('Successfully logged-out');
       this.router.navigate(['auth/login']);
   }

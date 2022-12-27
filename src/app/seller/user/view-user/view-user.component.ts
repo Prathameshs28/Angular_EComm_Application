@@ -26,19 +26,15 @@ export class ViewUserComponent implements OnInit {
       this.http.secureGet(`users/${this.ID}`,this.storageService.getToken()).subscribe({
       
         next:(res) => {
-          // console.log(res);
           this.userData = res;
         
-          // console.log(this.userData)
           if(this.userData?.isEmailVerified){
             this.mailVerify = true;
           }
 
-          // console.log(this.mailVerify)
           
         },
         error: (err: any) => {
-          // this.error = err;
           console.log(err);
           }
       })

@@ -56,9 +56,7 @@ export class ProfileComponent implements OnInit {
       .secureGet('shop/auth/self', this.storageService.getCustomerToken())
       .subscribe({
         next: (data) => {
-          // console.log(data);
           this.userProfileData = data;
-          // console.log(this.userProfileData)
         },
         error: (err) => {
           console.log('cust self error: ', err);
@@ -69,15 +67,7 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  //   logout() {
-  //     if(this.storageService.checkCustomerLocalToken()){
-  //       this.toastr.success('Successfully logged-out');
-  //       localStorage.removeItem('CustomerData');
-  //       this.router.navigate(['auth/login']);
-  //   }
-
-  // }
-
+  
   // ---------------- addresses --------------------
 
   showAddresses() {
@@ -133,12 +123,9 @@ export class ProfileComponent implements OnInit {
   // ----------------------------------------------------------------------
 
   updateProfilePicture() {
-    // console.log(this.croppedImage);
     const file = this.DataURIToBlob(this.imageUpdateForm.value.photo);
     const fd = new FormData();
-    // console.log('form photo value',  this.imageUpdateForm.value.photo);
 
-    // fd.append('picture', this.imageUpdateForm.value.photo);
 
     fd.append('picture', file);
 
@@ -150,7 +137,6 @@ export class ProfileComponent implements OnInit {
       )
       .subscribe({
         next: (data: any) => {
-          // console.log(data);
           this.toastr.success('Image Updated Successfully!');
 
           this.loadUserDeatils();
@@ -158,7 +144,6 @@ export class ProfileComponent implements OnInit {
           this.closePopup();
         },
         error: (err: any) => {
-          // this.error = err.error.message;
           console.log(err);
         },
       });
@@ -172,7 +157,6 @@ export class ProfileComponent implements OnInit {
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
     const imageS = this.croppedImage;
-    // console.log('target images',imageS)
     this.imageUpdateForm.controls['photo'].setValue(imageS);
   }
 
@@ -184,7 +168,6 @@ export class ProfileComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          // console.log(res);
           this.toastr.success('', 'Profile Image deleted successfully!!');
           this.loadUserDeatils();
         },
@@ -272,7 +255,6 @@ export class ProfileComponent implements OnInit {
         next: (res) => {
           this.userName = res;
           this.userName = this.userName.name;
-          // console.log(this.userName);
           localStorage.setItem('userName', this.userName);
 
           let name = this.userName.split(' ');

@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
   refreshCaptcha() {
     this.recaptchaV3Service.execute('importantAction').subscribe({
       next: (token) => {
-        // console.log('captcha token: ',token)
+     
         this.captchaToken = token;
       },
       error: (err) => {
@@ -100,12 +100,12 @@ export class LoginComponent implements OnInit {
 
     this.loginForm.patchValue({ captcha: this.captchaToken });
 
-    // console.log(this.loginForm.value);
+   
 
     if (this.loginForm.valid) {
       this.http.post('shop/auth/login', this.loginForm.value).subscribe({
         next: (data: any) => {
-          // console.log(data);
+    
           this.storageService.setCustomerLocal(data);
 
           localStorage.setItem('userName', data.customer.name);
@@ -115,7 +115,7 @@ export class LoginComponent implements OnInit {
           this.toastr.success('Successfully logged-in');
 
           if (
-            // localStorage.getItem('cartState') ||
+           
             this.storageService.getCartState() ||
             localStorage.getItem('BuyNowProd')
           ) {
@@ -128,11 +128,11 @@ export class LoginComponent implements OnInit {
         },
         error: (err) => {
           this.error = err;
-          // console.log('login error: ', err.message);
+       
           this.refreshCaptcha();
         },
         complete: () => {
-          // console.log('login process completed');
+      
         },
       });
     }

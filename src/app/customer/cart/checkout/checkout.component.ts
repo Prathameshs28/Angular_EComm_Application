@@ -37,10 +37,10 @@ export class CheckoutComponent implements OnInit {
   addressForm!: FormGroup;
   sumitted = false;
   error:any;
-  deliveryFee = 50; // fixed delivery fee above 1000 rs
+  deliveryFee = 50; 
 
   ngOnInit(): void {
-    // this.getLocalData();
+
 
     if (this.storageService.hascheckOutPermission() == false) {
       this.router.navigate(['cart/cart-items']);
@@ -51,7 +51,7 @@ export class CheckoutComponent implements OnInit {
     if (this.buyNowFlag) {
       this.getBuyNowProduct();
     } else {
-      this.getLocalData(); // ngrx call
+      this.getLocalData(); 
     }
 
     this.loadAllAddress();
@@ -71,7 +71,7 @@ export class CheckoutComponent implements OnInit {
     this.localCartData = this.storageService.getBuyNowProductInLocal();
     this.localCartData = JSON.parse(this.localCartData);
     this.cartTotal = this.localCartData[0].price * this.localCartData[0].qty;
-    // console.log('buy now product',this.localCartData);
+   
   }
 
   // ---------- ngrx- get product list  ---------------
@@ -83,25 +83,23 @@ export class CheckoutComponent implements OnInit {
       let temp = JSON.parse(JSON.stringify(data));
       this.localCartData = temp;
 
-      // console.log('ngrx called');
-
-      // this.flag = true;
+    
 
       for (let i = 0; i < this.localCartData.length; i++) {
         this.cartTotal +=
           this.localCartData[i].price * this.localCartData[i].qty;
       }
 
-      // console.log('ngrx cart data',this.localCartData);
+     
     });
 
-    // console.log(this.flag)
+   
   }
 
   //--------------- remove cart using ngrx -----------------------
 
   removeFromCart(id: any) {
-    // console.log(this.localCartData.length);
+   
 
     for (let i = 0; i < this.localCartData.length; i++) {
       if (this.localCartData[i]._id == id) {
@@ -178,18 +176,15 @@ export class CheckoutComponent implements OnInit {
       } else {
         Swal.fire(`Atleast one unit required`);
       }
-      // console.log(this.localCartData[0]['qty']);
+      
       this.storageService.setBuyNowProductInLocal(this.localCartData);
 
       this.getBuyNowProduct();
     } else {
-      // console.log(id);
+     
       for (let i = 0; i < this.localCartData.length; i++) {
         if (this.localCartData[i]._id == id) {
-          // console.log('id found',this.localCartData[i]);
-
-          // let product = this.localCartData[i];
-          // let products = this.makeProduct(product);
+          
 
           let products = this.localCartData[i];
 
@@ -208,9 +203,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   incrementCount(id: any) {
-    // console.log(id);
-
-    // console.log(this.localCartData.length);
+    
     if (this.buyNowFlag) {
       this.localCartData = this.storageService.getBuyNowProductInLocal();
       this.localCartData = JSON.parse(this.localCartData);
@@ -221,19 +214,14 @@ export class CheckoutComponent implements OnInit {
         Swal.fire(`We're sorry! Only 10 unit(s) allowed in each order`);
       }
 
-      // console.log(this.localCartData[0]['qty']);
+      
       this.storageService.setBuyNowProductInLocal(this.localCartData);
 
       this.getBuyNowProduct();
     } else {
       for (let i = 0; i < this.localCartData.length; i++) {
         if (this.localCartData[i]._id == id) {
-          // console.log('id found',this.localCartData[i]);
-
-          // let product = this.localCartData[i];
-
-          // let products = this.makeProduct(product);
-
+          
           let products = this.localCartData[i];
 
           if (products['qty'] < 10) {
@@ -251,80 +239,7 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  //---------------------- Without Ngrx --------------------------
-
-  // getLocalData() {                      // without ngrx
-  //   this.cartTotal = 0;
-  //   if (this.storageService.checkCartItemsInLocal()) {
-  //     this.localCartData = this.storageService.getLocalCart();
-
-  //     this.localCartData = JSON.parse(this.localCartData);
-
-  //     this.flag = true;
-
-  //     for (let i = 0; i < this.localCartData.length; i++) {
-  //       this.cartTotal +=
-  //         this.localCartData[i].price * this.localCartData[i].qty;
-  //     }
-
-  //     // console.log(this.localCartData);
-  //   } else {
-  //     this.flag = false;
-
-  //     console.log('called');
-  //   }
-  // }
-
-  // ---------------- remove item without ngrx ------------------
-
-  // removeFromCart(id: any) {
-  //   // console.log(this.localCartData.length);
-
-  //   for (let i = 0; i < this.localCartData.length; i++) {
-  //     if (this.localCartData[i]._id == id) {
-  //       this.localCartData.splice(i, 1);
-  //     }
-  //   }
-
-  //   if (this.localCartData.length == 0) {
-  //     localStorage.removeItem('CartData');
-
-  //     setTimeout(() => {
-  //       Swal.fire({
-  //         position: 'top-end',
-  //         icon: 'success',
-  //         title: 'All products removed',
-  //         showConfirmButton: false,
-  //         timer: 1500,
-  //       });
-  //       this.router.navigate(['products/list']);
-  //     }, 1000);
-  //   } else {
-  //     this.storageService.setLocalCart(this.localCartData);
-  //   }
-
-  //   this.getLocalData();
-  // }
-
-  // sweetAlertForDelete(id: any) {
-  //   Swal.fire({
-  //     title: 'Are you sure?',
-  //     text: "You won't be able to revert this!",
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#3085d6',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: 'Yes, delete it!',
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       this.removeFromCart(id);
-
-  //       console.log(id);
-  //       Swal.fire('Deleted!', 'Product has been deleted.', 'success');
-  //     }
-  //   });
-  // }
-
+  
   // ------------------ get all addresses----------------
   allAddresses?: any;
 
@@ -335,17 +250,16 @@ export class CheckoutComponent implements OnInit {
       .secureGet('customers/address', this.storageService.getCustomerToken())
       .subscribe({
         next: (res) => {
-          // console.log(res);
+          
           this.allAddresses = res;
           this.defaultAddress = this.allAddresses?.[0];
-          // console.log(this.allAddresses);
-          // console.log(this.allAddresses);
+          
         },
         error: (err) => {
           console.log(err);
         },
         complete: () => {
-          // console.log('all address loaded');
+         
         },
       });
   }
@@ -382,7 +296,7 @@ export class CheckoutComponent implements OnInit {
 
   addNewAddress() {
     this.sumitted = true;
-    // console.log(this.addressForm.value.addresses[0])
+
     if (this.addressForm.valid) {
       this.http
         .securePost(
@@ -397,13 +311,13 @@ export class CheckoutComponent implements OnInit {
             this.addressForm.reset();
             this.sumitted = false;
             this.toastr.success('New address added successfully!!');
-            // console.log(this.addressForm.value);
+            
           },
           error: (err) => {
             console.log(err);
           },
           complete: () => {
-            // console.log('new address added');
+           
             this.addressForm.reset();
           },
         });
@@ -411,7 +325,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   selectedAddress(id: any) {
-    // console.log(id);
+   
 
     for (let i = 0; i < this.allAddresses.length; i++) {
       if (this.allAddresses[i]._id == id) {
@@ -423,7 +337,7 @@ export class CheckoutComponent implements OnInit {
 
   updateID: any;
   editAddress(index: any, id: any) {
-    // console.log(index);
+    
     this.updateID = id;
 
     this.addressForm.patchValue({
@@ -468,17 +382,15 @@ export class CheckoutComponent implements OnInit {
 
   // --------- order confimration -----------------
 
-  // this.defaultAddress
-  // this.localCartData
-
+  
   productListOrder: any = [];
   addressForOder: any;
   orderID: any;
   createOrderProducts() {
-    // console.log('products data created',this.localCartData)
+    
 
     for (let i = 0; i < this.localCartData.length; i++) {
-      // console.log(this.localCartData[i]);
+     
 
       let obj = {
         productId: this.localCartData[i]._id,
@@ -488,14 +400,14 @@ export class CheckoutComponent implements OnInit {
         subTotal: this.localCartData[i].price * this.localCartData[i].qty,
       };
 
-      // console.log("obj: ",obj);
+     
 
       this.productListOrder.push(obj);
     }
   }
 
   createOrderAddress() {
-    // console.log('order address: ',this.defaultAddress);
+    
 
     this.addressForOder = {
       street: this.defaultAddress.street,
@@ -505,7 +417,7 @@ export class CheckoutComponent implements OnInit {
       pin: this.defaultAddress.pin,
     };
 
-    // console.log(this.addressForOder)
+  
   }
 
   confirmOrderSweetAlert() {
@@ -525,8 +437,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   confirmOrder() {
-    // console.log('order address: ',this.defaultAddress);
-    // console.log('order data: ',this.localCartData);
+   
 
     if (this.cartTotal < 1000) {
       this.cartTotal += this.deliveryFee;
@@ -540,7 +451,7 @@ export class CheckoutComponent implements OnInit {
       address: this.addressForOder,
     };
 
-    // console.log(OrderData);
+
 
     this.http
       .securePost(
@@ -554,9 +465,9 @@ export class CheckoutComponent implements OnInit {
           console.log(data);
           let orderID = data.order._id;
 
-          // console.log('Order ID',orderID);
+         
           this.toastr.success('', 'Your order confirmed!!!');
-          // localStorage.removeItem('CartData');
+          
           if (this.buyNowFlag) {
             localStorage.removeItem('BuyNowProd');
           } else {
@@ -570,7 +481,7 @@ export class CheckoutComponent implements OnInit {
           }, 2000);
         },
         error: (err: any) => {
-          // this.error = err.error.message;
+         
           this.error = err;
           console.log(err);
         },

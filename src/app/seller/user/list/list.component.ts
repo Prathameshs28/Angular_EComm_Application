@@ -40,24 +40,20 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.p = this.pageService.getPageNumber();
-    // console.log(this.p);
     this.getUsers();
   }
 
   getUsers() {
-    // console.log(this.p)
     this.http
       .secureGet(`users?page=${this.p}`, this.storageService.getToken())
       .subscribe({
         next: (res) => {
-          // console.log(res);
           this.userData = res;
           this.searchAllData = this.userData; // for search operation
           this.total = this.userData.totalResults;
           console.log(this.userData);
         },
         error: (err: any) => {
-          // this.error = err;
           console.log(err);
         }
       });
@@ -66,15 +62,12 @@ export class ListComponent implements OnInit {
   }
 
   pageChangeEvent(event: number) {
-    // console.log(event);
     this.p = event;
     this.getUsers();
   }
 
   viewProfile(id: any) {
-    // console.log(id);
     this.pageService.setPageNumber(this.p);
-    //  console.log(this.p)
     this.toastr.success('', 'User details fetched!');
     this.route.navigate(['seller/user/view', id]);
   }
@@ -82,19 +75,16 @@ export class ListComponent implements OnInit {
 
 
   deleteUser() {
-    // console.log('delete');
 
     this.http
       .secureDelete(`users/${this.deleteID}`, this.storageService.getToken())
       .subscribe({
         next: (res) => {
-          // console.log(res);
           this.closePopup();
           this.toastr.error('', 'User Deleted');
           this.getUsers();
         },
         error: (err: any) => {
-          // this.error = err;
           console.log(err);
         },
       });
@@ -111,7 +101,6 @@ export class ListComponent implements OnInit {
 
 
   updateForm() {
-    // console.log('edit');
     this.editForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
 
@@ -154,23 +143,19 @@ export class ListComponent implements OnInit {
     });
 
     this.updateID = editID;
-    // console.log(this.updateID);
     this.updateForm();
 
     this.http
       .secureGet(`users/${this.updateID}`, this.storageService.getToken())
       .subscribe({
         next: (res) => {
-          // console.log(res);
           this.updateData = res;
 
-          // console.log(this.updateData);
 
           this.name?.setValue(this.updateData.name);
           this.email?.setValue(this.updateData.email);
         },
         error: (err: any) => {
-          // this.error = err;
           console.log(err);
         },
       });
@@ -197,7 +182,6 @@ export class ListComponent implements OnInit {
           this.getUsers();
         },
         error: (err: any) => {
-          // this.error = err;
 
           console.log(err, 'update field');
         },
@@ -213,17 +197,14 @@ export class ListComponent implements OnInit {
   search(value: string): void {
 
     this.searchAllData=this.searchAllData?.results;
-    // console.log(this.searchAllData);
 
     let listArray=[];
     for(let i=0;i<this.searchAllData?.length;i++){
         listArray.push(this.searchAllData[i].name);
     }
-    // console.log(listArray);
 
     listArray = listArray.filter((val:any) =>{
       val.toLowerCase().includes(value);   
-      // console.log(val)
     })
 
     listArray = [];

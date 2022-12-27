@@ -37,14 +37,12 @@ export class ViewProductComponent implements OnInit {
         next:(res) => {
      
           this.oneProduct = res;
-          // console.log(this.oneProduct); 
 
         
 
           
         },
         error: (err: any) => {
-          // this.error = err;
           console.log(err);
           }
       })
@@ -69,21 +67,6 @@ export class ViewProductComponent implements OnInit {
     this.widgetsContent.nativeElement.scrollLeft += 150;
   }
 
-  // deleteProduct(id: any) {
-  //   // console.log(id);
-  //   this.http
-  //     .secureDelete(`products/${id}`, this.storageService.getToken())
-  //     .subscribe({
-  //       next: (res) => {
-  //         this.toastr.success('', 'Product Deleted');
-  //         this.getProductList(this.pageLimit,this.pageNo);
-  //       },
-  //       error: (err: any) => {
-  //         // this.error = err;
-  //         console.log(err);
-  //       },
-  //     });
-  // }
-
+  
 
 }

@@ -31,7 +31,6 @@ export class ViewOrderComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.orderID = params['id'];
       });
-      // console.log(this.orderID);
 
       this.getOneOrder();
   }
@@ -46,7 +45,6 @@ export class ViewOrderComponent implements OnInit {
         this.prodcutData =  this.oneOrder[0]?.items;
         this.addressData = this.oneOrder[0]?.address;
         this.orderData = this.oneOrder[0];
-      //  console.log('product: ',  this.prodcutData)
         console.log( this.oneOrder[0]);
       },
       error:(err) =>{
@@ -54,13 +52,6 @@ export class ViewOrderComponent implements OnInit {
       }
     })
 }
-
-// createdAt: "2022-08-24T09:50:01.143Z"   
-// deliveryFee: 50 
-// paymentStatus: "Pending"
-// status: "Pending"
-// total: 68509
-// _id: "6305f4499c62bfabae65b2ea"
 
 
 

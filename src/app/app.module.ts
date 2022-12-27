@@ -36,7 +36,6 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     RecaptchaV3Module,
-    // StoreModule.forRoot({ cart: cartReducer })  // working
     StoreModule.forRoot({ cart: cartReducer },{metaReducers})
 
     
@@ -58,12 +57,12 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '893913805202-rg7o6somctq21ike6dk1u0d696t64e0q.apps.googleusercontent.com'
+              'here google provider key'
             ),
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('365586852354146'),
+            provider: new FacebookLoginProvider('here facebook provider key'),
           },
         ],
         onError: (err) => {
@@ -73,7 +72,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     },
     {
       provide: RECAPTCHA_V3_SITE_KEY,
-      useValue: '6LevmbQZAAAAAMSCjcpJmuCr4eIgmjxEI7bvbmRI',
+      useValue: 'here recaptcha site key',
     },
   ],
   bootstrap: [AppComponent],

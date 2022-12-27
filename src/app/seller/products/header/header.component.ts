@@ -11,46 +11,43 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router:Router,
+  constructor(private router: Router,
     private authService: SocialAuthService,
     private toastr: ToastrService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
   }
 
-  showMyProfile(){
+  showMyProfile() {
     this.router.navigate(['seller/home/profile'])
   }
 
-  showProductList(){
+  showProductList() {
     this.router.navigate(['seller/products/list'])
-      
+
   }
 
-  showAllUsers(){
+  showAllUsers() {
     this.router.navigate(['seller/user/list'])
   }
 
 
-  logout(){
+  logout() {
     this.authService.signOut(true)
       .then(
         (success) => {
-          // console.log('logout success',success);
-   
+
         },
         (bad) => {
-          // console.log('logout problem',bad);         
         }
-      ) 
+      )
       .catch((err) => console.log(err));
-     
+
     this.toastr.success('Successfully logged-out');
-      sessionStorage.clear();
-      // localStorage.clear();
-      localStorage.removeItem("UserData");
-      this.router.navigate(['seller/auth/login']);
-   
+    sessionStorage.clear();
+    localStorage.removeItem("UserData");
+    this.router.navigate(['seller/auth/login']);
+
   }
 }

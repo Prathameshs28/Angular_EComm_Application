@@ -46,10 +46,10 @@ export class ViewProductComponent implements OnInit {
 
         this.oneProduct.qty = 1;
 
-        // console.log('qty added: ',this.oneProduct);
+       
       },
       error: (err: any) => {
-        // this.error = err;
+       
         console.log(err);
       },
     });
@@ -98,7 +98,7 @@ export class ViewProductComponent implements OnInit {
   cartAllData: any = [];
 
   showStateData() {
-    // console.log(this.cartAllData);
+    
     this.store.select(getCartProd).subscribe((data) => {
       let temp = JSON.parse(JSON.stringify(data));
       this.cartAllData = [...(temp || [])];
@@ -146,7 +146,7 @@ export class ViewProductComponent implements OnInit {
       this.addNewProductToCart(products);
     }
 
-    // localStorage.setItem('guard','checkoutflag');
+ 
   }
 
   addNewProductToCart(products: CartProducts) {

@@ -26,7 +26,6 @@ export class VerifyEmailComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       console.log(params)
       this.token = params['token'];
-      // console.log(this.token);
       this.http.verifyMail(this.token).subscribe({
         next: (data: any) => {
           this.toastr.success('Successfully mail verified 👍');
@@ -34,7 +33,6 @@ export class VerifyEmailComponent implements OnInit {
         },
         error: (err) => {
           
-          // console.log(this.error)
           this.error = err;
         },
       });

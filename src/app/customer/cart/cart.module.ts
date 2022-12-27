@@ -9,7 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 import { CheckoutComponent } from './checkout/checkout.component';
 
-// import {CdkStepperModule} from '@angular/cdk/stepper';
+
 import {NgStepperModule} from 'angular-ng-stepper';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,41 +32,6 @@ import { cartReducer } from './state/cart.reducer';
 import { ADD_TO_CART } from './state/cart.selector';
 import { PayComponent } from './pay/pay.component';
 
-
-// import {
-//   MatAutocompleteModule,
-
-//   MatBottomSheetModule,
-//   MatButtonModule,
-//   MatButtonToggleModule,
-//   MatCardModule,
-//   MatCheckboxModule,
-//   MatChipsModule,
-//   MatDatepickerModule,
-//   MatDialogModule,
-//   MatDividerModule,
-//   MatExpansionModule,
-//   MatGridListModule,
-//   MatIconModule,
-//   MatInputModule,
-//   MatListModule,
-//   MatMenuModule,
-//   MatNativeDateModule,
-//   MatPaginatorModule,
-//   MatProgressBarModule,
-//   MatProgressSpinnerModule,
-//   MatRadioModule,
-//   MatRippleModule,
-//   MatSelectModule,
-//   MatSidenavModule,
-//   MatSliderModule,
-//   MatSlideToggleModule,
-//   MatSnackBarModule,
-//   MatSortModule,
-//   MatStepperModule,
-//   MatTableModule,
-//   MatTabsModule,MatPaginatorModule
-// } from '@angular/material';
 
 @NgModule({
   declarations: [CartItemsComponent, CheckoutComponent, PayComponent],

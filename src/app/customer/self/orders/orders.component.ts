@@ -55,14 +55,12 @@ export class OrdersComponent implements OnInit {
       .subscribe({  
         next:(data) =>{
 
-          // console.log(data);
 
           this.allData = data;
 
           this.allProducts = this.allData.results;
           this.allProducts= this.allProducts.reverse();
 
-          // console.log(this.allProducts);
         },
         error:(err) =>{
           console.log(err);
@@ -74,7 +72,6 @@ export class OrdersComponent implements OnInit {
 
 
   viewOrder(id:any){
-      // console.log(id);
 
       this.router.navigate(['self/viewOrder',id])
   }

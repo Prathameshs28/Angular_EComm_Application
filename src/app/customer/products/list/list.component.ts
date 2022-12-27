@@ -48,9 +48,7 @@ export class ListComponent implements OnInit {
    this.showStateData();
     this.getProductList(10, 1);
 
-    // if (this.storageService.checkCustomerLocalToken()) {
-    //   this.lowerHeader = true;
-    // }
+    
   }
 
   getProductList(limit?: any, page?: any) {
@@ -76,21 +74,19 @@ export class ListComponent implements OnInit {
             obj.qty = 1;
           });
 
-          // console.log('all products: ',this.products); // all product list
+         
 
           this.totalPages = this.getAllProducts?.totalResults;
 
           this.allItems = this.getAllProducts?.totalResults; // for all items display
 
-          // console.log('allItems: ',this.allItems);
-
-          // console.log('all products details: ',this.getAllProducts)
+         
         },
         error: (err) => {
           console.log(err);
         },
         complete: () => {
-          // console.log('Get products process completed')
+          
         },
       });
   }
@@ -129,13 +125,13 @@ export class ListComponent implements OnInit {
   }
 
   addToCart(product: any) {
-    // console.log('before adding cartAllData length', this.cartAllData.length);
+   
 
    
 
     let products = this.makeProdObj(product);
 
-    //  this.store.dispatch(addProductToCart({ products }));    // working
+    
 
     let productExists = false;
 
@@ -148,23 +144,17 @@ export class ListComponent implements OnInit {
       }
     }
 
-    // else{
-    //   console.log('1st else to add ');
-    //   this.addNewProductToCart(products);
-
-    //   }
 
     if (productExists) {
       Swal.fire('Product already added to cart');
     } else {
-      // console.log('2nd else to add ');
+     
       this.store.dispatch(countIncr());
 
       this.addNewProductToCart(products);
     }
 
-    // localStorage.setItem('guard','checkoutflag');
-
+    
   }
 
   addNewProductToCart(products: CartProducts) {
@@ -184,7 +174,7 @@ export class ListComponent implements OnInit {
 
   buyNow(product: any) {
 
-    // console.log(product);
+  
     this.buyNowProdArray.push(product);
     this.storageService.setBuyNowFlag(true);
     this.storageService.setBuyNowProductInLocal(this.buyNowProdArray);
@@ -208,7 +198,7 @@ export class ListComponent implements OnInit {
 
 
   viewProduct(id: any) {
-    // console.log('Mobile ID: ', id);
+   
     this.pageService.setViewFlag(true);
 
     this.pageService.setPageNumber(this.pageNo);
@@ -220,7 +210,7 @@ export class ListComponent implements OnInit {
   //----- Pagination-----
 
   pageChangeEvent(event: number) {
-    // console.log('page no clicked: ', event);
+   
     this.pageService.setViewFlag(false);
     this.pageNo = event;
     this.getProductList(this.pageLimit, this.pageNo);

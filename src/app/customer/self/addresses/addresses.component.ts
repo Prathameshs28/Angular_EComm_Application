@@ -33,14 +33,12 @@ export class AddressesComponent implements OnInit {
       .secureGet('customers/address', this.storageService.getCustomerToken())
       .subscribe({
         next: (res) => {
-          // console.log(res);
           this.allAddresses = res;
         },
         error: (err) => {
           console.log(err);
         },
         complete: () => {
-          // console.log('all address loaded');
         },
       });
   }
@@ -63,7 +61,6 @@ export class AddressesComponent implements OnInit {
     this.updateBtn = false;
     this.displayStyle = 'block';
 
-    // this.addAddress();
   }
 
   get street() {
@@ -96,10 +93,7 @@ export class AddressesComponent implements OnInit {
 
   addNewAddress() {
 
-    // this.addAddress();
-
     this.sumitted = true;
-    // console.log(this.addressForm.value.addresses[0])
     if (this.addressForm.valid) {
       this.http
         .securePost(
@@ -109,18 +103,15 @@ export class AddressesComponent implements OnInit {
         )
         .subscribe({
           next: (res) => {
-            // console.log(res);
             this.loadAllAddress();
             this.sumitted = false;
             this.closePopup();
             this.toastr.success('New address added successfully!!');
-            // console.log(this.addressForm.value);
           },
           error: (err) => {
             console.log(err);
           },
           complete: () => {
-            // console.log('new address added');
           },
         });
     }
@@ -144,7 +135,6 @@ export class AddressesComponent implements OnInit {
   }
 
   sweetAlertDeleteAddress(id: any) {
-    // console.log(id);
 
     this.http
       .secureDelete(
@@ -171,7 +161,6 @@ export class AddressesComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          // console.log(res);
           this.showAddSweetAlert(res);
         },
         error: (err) => {

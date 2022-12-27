@@ -16,6 +16,5 @@ import { ProductsModule } from '../products/products.module';
 })
 export class HomeModule implements OnInit {
   ngOnInit(): void {
-    // console.log('home module use')
   }
  }

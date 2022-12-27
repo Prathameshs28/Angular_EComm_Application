@@ -40,7 +40,6 @@ export class ProfileComponent implements OnInit {
       error: (err: any) => {
         this.error = err;
       },
-      // complete:()=>{console.log('process completed')}
     });
   }
 

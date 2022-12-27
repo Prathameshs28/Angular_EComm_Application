@@ -52,7 +52,6 @@ export class RegistrationComponent implements OnInit {
     this.recaptchaV3Service.execute('importantAction')
     .subscribe({
     next:(token) => {
-      // console.log('sub captcha token: ',token)
       this.captchaToken = token;
       
       
@@ -66,7 +65,6 @@ export class RegistrationComponent implements OnInit {
     this.recaptchaV3Service.execute('importantAction')
     .subscribe({
     next:(token) => {
-      // console.log('sub captcha token: ',token)
       this.captchaToken = token;
       
       
@@ -111,13 +109,11 @@ export class RegistrationComponent implements OnInit {
 
            this.getCaptchaToken();
 
-            // console.log(data);
             let token = data.token;
             
             setTimeout(()=>{
               this.http.securePost('auth/send-verification-email',token,{captcha:this.captchaToken})
               .subscribe((data: any) => {
-                // console.log(data)
                 this.toastr.success(
                   'Check your mailbox and verify mail',
                   'Successfully Registered 👍'
@@ -129,7 +125,6 @@ export class RegistrationComponent implements OnInit {
           
           },
           error: (err: any) => {
-            // this.error = err.error.message;
             this.error = err;
             this.getCaptchaToken();
           },
@@ -138,7 +133,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   login() {
-    //back to login
     this.route.navigate(['seller/auth/login']);
   }
 

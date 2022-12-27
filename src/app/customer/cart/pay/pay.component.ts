@@ -173,20 +173,19 @@ export class PayComponent implements OnInit {
 
   onKeyCardExpiry(event: any) {
     this.cardExpiryCtrl = this.cardForm.get('expiry');
-    // this.count++;
-    // console.log('count: ',this.count)
+    
 
     this.count = event.target.value.length;
     if (this.count == 2) {
       this.cardExpiryCtrl.value += '/';
-      // console.log(this.cardExpiryCtrl.value);
+    
 
       this.cardForm.patchValue({
         expiry: this.cardExpiryCtrl.value,
       });
     }
 
-    //  console.log(event.target.value);
+    
   }
 
   pay() {
@@ -212,7 +211,7 @@ export class PayComponent implements OnInit {
 
         .subscribe({
           next: (data: any) => {
-            // console.log('payment confirmation', data);
+          
             localStorage.removeItem('ORDERID');
             this.toastr.success('', 'Payment successful !!!');
 
@@ -222,9 +221,9 @@ export class PayComponent implements OnInit {
           },
           error: (err: any) => {
             this.error = err;
-            // this.error = err;
+           
             this.toastr.error('', 'Somthing went wrong!');
-            // console.log(err);
+           
           },
         });
     }

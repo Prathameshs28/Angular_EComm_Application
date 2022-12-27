@@ -69,18 +69,15 @@ export class CreateProductComponent implements OnInit,OnDestroy {
 
   addProduct() {
     this.sumitted = true;
-    // console.log('added');
 
     const formData = new FormData();
 
-    // console.log('form photo value: ',  this.productForm.value.photo);d
 
     for (let i = 0; i < this.productForm.value.photo.length; i++) {
       formData.append('images', this.productForm.value.photo[i]);
     }
 
 
-    // let descInHtml = this.productForm.value.description; 
    
 
     formData.append('name', this.productForm.value.name);
@@ -89,20 +86,16 @@ export class CreateProductComponent implements OnInit,OnDestroy {
 
   
 
-  //  console.log('Form value: ',this.productForm.value);
 
     if (this.productForm.valid) {
-      // console.log(this.storageService.getToken())
       this.http
         .secureProdPost('products', this.storageService.getToken(), formData)
         .subscribe({
           next: (data: any) => {
-            // console.log(data);
             this.toastr.success('Product created Successfully!');
             this.router.navigate(['seller/products/list'])
           },
           error: (err: any) => {
-            // this.error = err.error.message;
             console.log(err);
           },
         });
@@ -113,37 +106,14 @@ export class CreateProductComponent implements OnInit,OnDestroy {
 
   onSelectFile(e: any) {
 
-    this.files.push(...e.addedFiles); // dropzone  
-
+    this.files.push(...e.addedFiles); 
     if (this.files[0]){
       console.log(this.files);
       const imageS = this.files;
       this.productForm.controls['photo'].setValue(imageS);
     }
 
-  /*  if (e.target.files && e.target.files[0]) {
-
-      // var fileAmount = e.target.files.length;
-
-      const imageS = e.target.files;
-
-      console.log('imageS  ', imageS);
-
-      // this.productForm.controls['photo'].setValue(imageS);
-
-      // console.log(this.productForm.value)
-
-
-      // for (let i = 0; i < fileAmount; i++) {
-      //   var reader = new FileReader();
-      //   reader.onload = (event: any) => {
-
-      //   };
-      //   reader.readAsDataURL(e.target.files[i]);
-      // }
-
-    }  */
-
+  
   }
 
   onRemove(event:any) {

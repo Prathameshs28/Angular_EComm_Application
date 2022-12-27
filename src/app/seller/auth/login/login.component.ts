@@ -65,15 +65,12 @@ export class LoginComponent implements OnInit {
       this.route.navigate(['seller/home/profile']);
     }
 
-    // this.fbCaptcha.loadAndInitFBSDK();
-
-    // login with google
+   
     this.authService.authState.subscribe((data) => {
       this.user = data;
 
       this.googleToken = data?.idToken;
 
-      // console.log(this.googleToken);
 
       if (
         this.googleToken != this.storageService.getOldToken() &&
@@ -91,7 +88,6 @@ export class LoginComponent implements OnInit {
               this.refreshCaptcha();
               this.gToken = JSON.parse(JSON.stringify(data));
 
-              //  this.toastr.success('Successfully logged-in');
 
               this.storageService.setLocal(this.gToken);
 
@@ -100,7 +96,6 @@ export class LoginComponent implements OnInit {
               this.refreshCaptcha();
             },
             error: (err) => {
-              //  console.log(err);
               this.refreshCaptcha();
             },
           });
@@ -127,7 +122,6 @@ export class LoginComponent implements OnInit {
   refreshCaptcha() {
     this.recaptchaV3Service.execute('importantAction').subscribe({
       next: (token) => {
-        // console.log('captcha token: ',token)
         this.captchaToken = token;
       },
       error: (err) => {
@@ -146,12 +140,10 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.http.post('auth/login', this.loginForm.value).subscribe({
         next: (data: any) => {
-          // console.log(data);
           this.storageService.setLocal(data);
 
           this.toastr.success('Successfully logged-in');
           this.route.navigate(['seller/home/profile']);
-          // this.route.navigate(['products/list']);
 
           this.refreshCaptcha();
         },
@@ -166,7 +158,6 @@ export class LoginComponent implements OnInit {
     this.fbCaptcha.loadAndInitFBSDK();
 
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then((data) => {
-      // console.log('fb login success')
       this.fbToken = data?.authToken;
 
       this.http
@@ -178,7 +169,6 @@ export class LoginComponent implements OnInit {
           next: (data) => {
             const fToken = JSON.parse(JSON.stringify(data));
 
-            //  console.log("loginToken: ",fToken.token)
 
             this.storageService.setLocal(fToken);
 
@@ -187,7 +177,6 @@ export class LoginComponent implements OnInit {
             this.refreshCaptcha();
           },
           error: (err) => {
-            //  console.log(err);
             this.refreshCaptcha();
           },
         });

@@ -108,7 +108,6 @@
                   "
                   [innerHTML]="data?.description | dompurify"   
                 >
-                  <!-- Description: {{ data?.description }} -->
                 </span>
               </p>
             </div>
@@ -206,17 +205,7 @@
 
             <div class="prodDesc mb-3">
               <label class="form-label">Product Description</label>
-              <!-- <textarea
-                formControlName="description"
-                [class.is-invalid]="
-                  f['description']!.invalid && f['description']!.touched
-                "
-                type="text"
-                class="form-control"
-                name="description"
-
-              >
-              </textarea> -->
+             
 
               <div class="editor">
                 <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
@@ -296,37 +285,13 @@
                   ></i>
                 </div>
 
-                <!-- image preview after select -->
-
-                <!-- <div class="imageUpdate">
-                  <div *ngFor="let preImg of imageUrl; let i = index">
-                    <img
-                      [src]="preImg"
-                      class="imgBox newAddedImg"
-                      alt="mobile"
-                    />
-
-                    <i
-                      title="Remove"
-                      class="fa fa-times-circle-o del"
-                      (click)="deleteSelectedImg(i)"
-                    ></i>
-                  </div>
-                </div> -->
+               
 
                 <!--  End image preview after select -->
                 
               </div>
 
-              <!-- <div class="addNewImg">
-                <label class="form-label">Add new Images</label>
-                <input
-                  class="form-control"
-                  type="file"
-                  (change)="onSelectFile($event)"
-                  multiple
-                />
-              </div> -->
+              
 
               <div>
                 <div class="custom-dropzone drp" ngx-dropzone [multiple]="true" [accept]="'image/*'" (change)="onSelectFile($event)">

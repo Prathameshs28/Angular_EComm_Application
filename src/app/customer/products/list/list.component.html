@@ -1,18 +1,6 @@
 <app-header></app-header>
 
-<!--  <nav *ngIf="lowerHeader" class="navbar navbar-light navbar-expand-sm headNav">
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="d-flex">
-          <input class="form-control input-group-sm me-2" type="search"
-          [(ngModel)]="searchTerm" (keyup)="search(searchTerm)" name="searchTerm"
-          placeholder="Search Product" aria-label="Search">
-       
-        </form>   
-  
-    </div>
-  </div>
-</nav>   -->
+
 
 <div>
   <div class="row row-cols-1 row-cols-md-5 g-3 m-4 list">
@@ -116,17 +104,12 @@
                 "
               >
               Description: <span [innerHTML]="data?.description | dompurify" ></span>   
-                <!-- Description: {{ data?.description }} -->
+              
               </p>
             </div>
 
             <div class="card-footer activityBtn">
-              <!-- <i
-              title="Add to cart"
-              class="fa fa-shopping-cart"
-              style="font-size: 30px; color:red;"
-                    
-            ></i> -->
+            
 
               <button
                 class="btn btn-sm btn-warning"

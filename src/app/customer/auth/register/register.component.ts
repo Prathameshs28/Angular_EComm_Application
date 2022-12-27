@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
   getCaptchaToken() {
     this.recaptchaV3Service.execute('importantAction').subscribe({
       next: (token) => {
-        // console.log('sub captcha token: ',token)
+        
         this.captchaToken = token;
       },
       error: (err) => {
@@ -100,16 +100,14 @@ export class RegisterComponent implements OnInit {
 
     this.registerForm.patchValue({captcha:this.captchaToken});
 
-    // console.log('reg capthca: ',this.captchaToken);
-
-    // console.log(this.registerForm.value);
+    
 
     if (this.registerForm.valid) {
       this.http
         .post('shop/auth/register', this.registerForm.value)
         .subscribe({
           next: (data) => {
-            // console.log('registered data: ', data);
+            
             this.route.navigate(['auth/login']);
           },
           error: (err) => {
@@ -117,7 +115,7 @@ export class RegisterComponent implements OnInit {
             console.log(err);
           },
           complete: () => {
-            // console.log('registration successfully done');
+           
             this.toastr.success('', 'Successfully Registered 👍');
           },
         });

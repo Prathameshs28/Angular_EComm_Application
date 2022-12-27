@@ -80,7 +80,6 @@ export class CreateUserComponent implements OnInit {
             this.route.navigate(['seller/user/list']);
           },
           error: (err: any) => {
-            // this.error = err.error.message;
             this.error = err;
           },
         });

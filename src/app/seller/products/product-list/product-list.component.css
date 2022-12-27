@@ -24,12 +24,6 @@ img {
   background-image: url("https://apufpel.com.br/assets/img/seta_ult.png");
 }
 
-/*     ::ng-deep .carousel-indicators{
-    position: absolute;
-     top:230px; 
-
-     
-  }*/
 
 ::ng-deep .carousel-indicators [data-bs-target] {
   width: 20px !important;
@@ -72,19 +66,10 @@ img {
   margin: 1px;
 }
 
-/* .imgBox:hover{
-   backdrop-filter: blur(10px);
-   filter: blur(4px);
-   transition: 0.5s ease;
-} */
+
 
 .imgBoxBlur {
-  /* backdrop-filter: blur(10px);
-   filter: blur(4px);
-   transition: 0.5s ease; */
-
-  /* filter: blur(4px);  */
-  /* filter: grayscale(100%); */
+ 
   filter: blur(0.9px) grayscale(100%);
 }
 

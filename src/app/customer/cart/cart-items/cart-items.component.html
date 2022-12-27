@@ -22,25 +22,13 @@
           >
         </li>
       </ul>
-      <!-- <form class="d-flex">
-          <input class="form-control input-group-sm me-2" type="search"
-          [(ngModel)]="searchTerm" (keyup)="search(searchTerm)" name="searchTerm"
-          placeholder="Search User" aria-label="Search">
-          
-        </form>   -->
+     
     </div>
   </div>
 </nav>
 
 <div>
-  <!-- <button class="btn btn-secondary btn-sm" (click)="clearCart()">
-    Clear Cart
-  </button>
-
-  <button class="btn btn-secondary btn-sm" (click)="checkout()">
-    CheckOut
-  </button> -->
-
+  
   <div *ngIf="flag">
     <div class="row row-cols-1 row-cols-md-5 g-3 m-4 list">
       <div *ngFor="let data of localCartData; let i = index">
