@@ -27,6 +27,11 @@ export class OrdersComponent implements OnInit {
 
   totalResult:any;
 
+
+  /**
+   * @description method to get orders limit
+   */
+
   getOrderLimit(){
     this.http.secureGet('shop/orders',this.storageService.getCustomerToken())
     .subscribe({
@@ -42,7 +47,9 @@ export class OrdersComponent implements OnInit {
     })
   }
 
-
+ /**
+   * @description method to get all orders data
+   */
 
   getAllOrders() {
 
